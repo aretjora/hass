@@ -13,17 +13,13 @@
         message: "Home Assistant restarted"
 
 # Chili Lights
-- alias: 'Chili Lights On'
+- alias: 'Chili Lights'
   trigger:
-    - platform: time
-      at: '07:00:00'
+    platform: time
+    at: '07:00:00'
   action:
     - service: switch.turn_on
       entity_id: switch.chili_lamp
-- alias: 'Chili Lights Off'
-  trigger:
-    - platform: time
-      at: '21:00:00'
-  action:
+    - delay: 14:00:00
     - service: switch.turn_off
       entity_id: switch.chili_lamp
