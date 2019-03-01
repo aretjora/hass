@@ -1,0 +1,25 @@
+### SYSTEM ###
+- alias: "Startup Notification"
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: notify.ios_are
+      data:
+        message: "Home Assitant restarted"
+
+# Chili Lights
+- alias: 'Chili Lights On'
+  trigger:
+    - platform: time
+      at: '07:00:00'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.chili_lamp
+- alias: 'Chili Lights Off'
+  trigger:
+    - platform: time
+      at: '21:00:00'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.chili_lamp

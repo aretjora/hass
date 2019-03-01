@@ -1,0 +1,68 @@
+homeassistant:
+  name: Home
+  latitude: !secret location_latitude
+  longitude: !secret location_longitude
+  elevation: !secret location_elevation
+  unit_system: metric
+  time_zone: !secret location_tz
+  customize: !include customize.yaml
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Show the introduction message on startup.
+introduction:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Sensors
+sensor:
+  - platform: yr
+    monitored_conditions:
+      - temperature
+      - symbol
+  - platform: synologydsm
+    host: !secret synology_host
+    username: !secret synology_user
+    password: !secret synology_pwd
+    monitored_conditions:
+      - cpu_total_load
+      - memory_real_usage
+      - network_up
+  - platform: entur_public_transport
+    name: Buss
+    stop_ids:
+      - !secret buss_stop
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+      - type: processor_use
+  - platform: uptime
+  - platform: darksky
+    api_key: !secret dark_sky_api
+    monitored_conditions:
+      - summary
+      - temperature
+      - hourly_summary
+      - temperature_max
+
+air_quality:
+  - platform: norway_air
+
+# Text to speech
+tts:
+  - platform: google
+
+switch:
+  - platform: tplink
+    host: !secret tplink_switch_1
+
+ios:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
