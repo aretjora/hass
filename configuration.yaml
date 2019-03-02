@@ -23,6 +23,7 @@ sensor:
     monitored_conditions:
       - temperature
       - symbol
+      - windSpeed
   - platform: synologydsm
     host: !secret synology_host
     username: !secret synology_user
@@ -51,6 +52,18 @@ sensor:
       - hourly_summary
       - temperature_max
   - platform: google_wifi
+  - platform: template
+    sensors:
+      voltage_chili:
+        friendly_name: "Spenning"
+        unit_of_measurement: 'V'
+        icon_template: mdi:flash
+        value_template: "{{ state_attr('switch.chili_lamp', 'voltage') }}"
+
+verisure:
+  username: !secret verisure_user
+  password: !secret verisure_pwd
+  default_lock_code: !secret verisure_code
 
 speedtestdotnet:
   scan_interval:
