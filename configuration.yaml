@@ -55,6 +55,13 @@ sensor:
       - hourly_summary
       - temperature_max
   - platform: google_wifi
+  - platform: template
+    sensors:
+      voltage_chili:
+        friendly_name: "Spenning"
+        unit_of_measurement: 'V'
+        icon_template: mdi:flash
+        value_template: "{{ state_attr('switch.chili', 'voltage') }}"
 
 speedtestdotnet:
   scan_interval:
