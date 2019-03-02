@@ -50,6 +50,7 @@ sensor:
       - temperature
       - hourly_summary
       - temperature_max
+  - platform: google_wifi
 
 air_quality:
   - platform: norway_air
