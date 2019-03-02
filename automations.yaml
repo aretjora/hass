@@ -35,3 +35,22 @@
       data:
         entity_id: light.soverom_caroline
         transition: 1800
+
+  # Sun Scheduled
+- alias: 'Outdoor Sunrise'
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '+00:00:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id: light.ute
+
+- alias: 'Outdoor Sunset'
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '+00:00:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.ute
