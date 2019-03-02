@@ -7,10 +7,6 @@
     - service: notify.ios_are
       data:
         message: "Home Assistant restarted"
-    - service: tts.google_say
-      entity_id: media_player.kitchen
-      data:
-        message: "Home Assistant restarted"
 
 # Chili Lights
 - alias: 'Chili Lights'
