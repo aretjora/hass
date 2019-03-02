@@ -8,6 +8,15 @@
       data:
         message: "Home Assistant restarted"
 
+- alias: 'Good Morning'
+  trigger:
+    platform: time
+    at: '07:00:00'
+  action:
+    - service: notify.ios_are
+      data:
+        message: "Good morning! It's currently {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees in Stavanger. "
+
 # Lighting
 - alias: 'Chili Lights'
   trigger:
