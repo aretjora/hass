@@ -52,6 +52,14 @@ sensor:
       - temperature_max
   - platform: google_wifi
 
+speedtestdotnet:
+  scan_interval:
+    minutes: 120
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
 air_quality:
   - platform: norway_air
 
