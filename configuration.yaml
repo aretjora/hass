@@ -17,12 +17,16 @@ introduction:
 # http:
 #   base_url: example.duckdns.org:8123
 
+lovelace:
+  mode: yaml
+
 # Sensors
 sensor:
   - platform: yr
     monitored_conditions:
       - temperature
       - symbol
+      - windSpeed
   - platform: synologydsm
     host: !secret synology_host
     username: !secret synology_user
@@ -70,6 +74,11 @@ tts:
 switch:
   - platform: tplink
     host: !secret tplink_switch_1
+
+verisure:
+  username: !secret verisure_user
+  password: !secret verisure_pwd
+  default_lock_code: !secret verisure_code
 
 ios:
 
