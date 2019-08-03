@@ -17,8 +17,8 @@ introduction:
 # http:
 #   base_url: example.duckdns.org:8123
 
-lovelace:
-  mode: yaml
+#lovelace:
+#  mode: yaml
 
 # Sensors
 sensor:
@@ -61,7 +61,7 @@ sensor:
         friendly_name: "Spenning"
         unit_of_measurement: 'V'
         icon_template: mdi:flash
-        value_template: "{{ state_attr('switch.chili', 'voltage') }}"
+        value_template: "{{ state_attr('switch.kitchen_plant', 'voltage') }}"
 
 speedtestdotnet:
   scan_interval:
@@ -81,6 +81,8 @@ tts:
 switch:
   - platform: tplink
     host: !secret tplink_switch_1
+  - platform: tplink
+    host: !secret tplink_switch_2
 
 verisure:
   username: !secret verisure_user

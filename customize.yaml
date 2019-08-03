@@ -1,3 +1,6 @@
 # Switches
-switch.chili_lamp:
+switch.kitchen_plant:
+  icon: mdi:desk-lamp
+
+switch.drivhus:
   icon: mdi:desk-lamp
