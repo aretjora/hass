@@ -28,6 +28,8 @@
     - cpu_total_load
     - memory_real_usage
     - network_up
+    - network_down
+    - volume_percentage_used
 
 - platform: systemmonitor
   resources:
@@ -54,3 +56,9 @@
       unit_of_measurement: 'W'
       icon_template: mdi:projector
       value_template: "{{ state_attr('switch.projector', 'current_power_w') }}"
+
+    varmepumpe_effect:
+      friendly_name: "Varmepumpe effekt"
+      unit_of_measurement: 'W'
+      icon_template: mdi:radiator
+      value_template: "{{ state_attr('switch.varmepumpe', 'current_power_w') }}"

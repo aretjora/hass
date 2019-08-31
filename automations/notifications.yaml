@@ -4,16 +4,34 @@
     - platform: homeassistant
       event: start
   action:
-    - service: notify.ios_are
+    - service: !secret notification_user1
       data:
         message: "Home Assistant restarted"
 
 # Morning Routine
-- alias: 'Good Morning'
+- alias: 'Morning Notification'
   trigger:
     platform: time
     at: '06:30:00'
   action:
-    - service: notify.ios_are
+    - service: !secret notification_user1
       data:
         message: "God morgen! Været idag: {{states.sensor.dark_sky_summary.state}} og {{states.sensor.dark_sky_temperature.state|round}} grader i Stavanger. "
+
+# Car
+- alias: "Car Battery Notification"
+  trigger:
+    platform: time
+    at: '21:30:00'
+  condition:
+    - condition: state
+      entity_id: !secret car_external_power
+      state: 'off'
+    - condition: numeric_state
+      entity_id: !secret car_battery
+      below: 80
+  action:
+    - service: !secret notification_user1
+      data:
+        title: "Lading anbefales"
+        message: !secret car_battery_message
