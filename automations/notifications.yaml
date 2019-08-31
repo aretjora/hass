@@ -35,3 +35,14 @@
       data:
         title: "Lading anbefales"
         message: !secret car_battery_message
+
+# Saturn offline
+- alias: "Saturn Offline Notification"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.saturn
+      to: 'Disconnected'
+  action:
+    - service: !secret notification_user1
+      data:
+        title: "Saturn Offline"

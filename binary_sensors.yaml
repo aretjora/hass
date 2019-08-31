@@ -7,3 +7,9 @@
         minutes: 1
       value_template: >-
         {{ states('sensor.projector_effect')|float > 1 }}
+
+- platform: ping
+  name: Saturn
+  host: !secret synology_host
+  count: 1
+  scan_interval: 3600
