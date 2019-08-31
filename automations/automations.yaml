@@ -38,7 +38,7 @@
         entity_id: light.soverom_caroline
         transition: 1800
 
-# Day/Night
+# Outdoor Lights
 - alias: 'Outdoor Sunrise'
   trigger:
     platform: sun
@@ -56,6 +56,33 @@
   action:
     service: homeassistant.turn_on
     entity_id: light.ute
+
+# Hall lights
+- alias: 'Hall Lights Day'
+  trigger:
+    platform: time
+    at: '06:30:00'
+  action:
+    service: light.turn_on
+    data:
+        entity_id: 
+          - light.gang_inngang
+          - light.gang_kjeller
+          - light.gang_soverom
+        brightness_pct: 100
+
+- alias: 'Hall Lights Night'
+  trigger:
+    platform: time
+    at: '22:00:00'
+  action:
+    service: light.turn_on
+    data:
+        entity_id:
+          - light.gang_inngang
+          - light.gang_kjeller
+          - light.gang_soverom
+        brightness_pct: 30
 
 # Home Theater Lights
 - alias: "Projector Started"
