@@ -6,62 +6,37 @@ homeassistant:
   unit_system: metric
   time_zone: !secret location_tz
   customize: !include customize.yaml
+  auth_providers:
+   - type: legacy_api_password
+     api_password: !secret http_password
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
-
-# Show the introduction message on startup.
-introduction:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 # http:
 #   base_url: example.duckdns.org:8123
 
-#lovelace:
-#  mode: yaml
+automation: !include_dir_merge_list automations/
+binary_sensor: !include binary_sensors.yaml
+group: !include groups.yaml
+script: !include scripts.yaml
+sensor: !include sensors.yaml
 
-# Sensors
-sensor:
-  - platform: yr
-    monitored_conditions:
-      - temperature
-      - symbol
-      - windSpeed
-  - platform: synologydsm
-    host: !secret synology_host
-    username: !secret synology_user
-    password: !secret synology_pwd
-    monitored_conditions:
-      - cpu_total_load
-      - memory_real_usage
-      - network_up
-  - platform: entur_public_transport
-    name: Buss
-    stop_ids:
-      - !secret buss_stop
-  - platform: systemmonitor
-    resources:
-      - type: disk_use_percent
-        arg: /home
-      - type: memory_free
-      - type: memory_use_percent
-      - type: processor_use
-  - platform: uptime
-  - platform: darksky
-    api_key: !secret dark_sky_api
-    monitored_conditions:
-      - summary
-      - temperature
-      - hourly_summary
-      - temperature_max
-  - platform: google_wifi
-  - platform: template
-    sensors:
-      voltage_chili:
-        friendly_name: "Spenning"
-        unit_of_measurement: 'V'
-        icon_template: mdi:flash
-        value_template: "{{ state_attr('switch.kitchen_plant', 'voltage') }}"
+discovery:
+  ignore:
+    - philips_hue
+
+ios:
+
+apple_tv:
+
+hue:
+  bridges:
+    - host: !secret hue_bridge
+
+media_player:
+  - platform: plex
 
 speedtestdotnet:
   scan_interval:
@@ -76,21 +51,10 @@ air_quality:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
 
-switch:
-  - platform: tplink
-    host: !secret tplink_switch_1
-  - platform: tplink
-    host: !secret tplink_switch_2
-
-verisure:
-  username: !secret verisure_user
-  password: !secret verisure_pwd
-  default_lock_code: !secret verisure_code
-
-ios:
-
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
+volkswagencarnet:
+  username: !secret carnet_user
+  password: !secret carnet_pwd
+  scan_interval:
+    minutes: 5

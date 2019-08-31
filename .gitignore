@@ -3,6 +3,8 @@
 !*.yaml
 !.gitignore
 !*.md
+!automations
 
 secrets.yaml
 known_devices.yaml
+plex.conf

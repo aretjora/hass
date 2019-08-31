@@ -1,0 +1,19 @@
+# System
+- alias: "Startup Notification"
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: notify.ios_are
+      data:
+        message: "Home Assistant restarted"
+
+# Morning Routine
+- alias: 'Good Morning'
+  trigger:
+    platform: time
+    at: '06:30:00'
+  action:
+    - service: notify.ios_are
+      data:
+        message: "God morgen! Været idag: {{states.sensor.dark_sky_summary.state}} og {{states.sensor.dark_sky_temperature.state|round}} grader i Stavanger. "

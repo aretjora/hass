@@ -1,0 +1,56 @@
+# Bus
+- platform: entur_public_transport
+  name: Buss
+  stop_ids:
+    - !secret buss_stop
+
+# Weather
+- platform: yr
+  monitored_conditions:
+    - temperature
+    - symbol
+    - windSpeed
+
+- platform: darksky
+  api_key: !secret dark_sky_api
+  language: nb
+  monitored_conditions:
+    - summary
+    - temperature
+    - hourly_summary
+
+# System metrics
+- platform: synologydsm
+  host: !secret synology_host
+  username: !secret synology_user
+  password: !secret synology_pwd
+  monitored_conditions:
+    - cpu_total_load
+    - memory_real_usage
+    - network_up
+
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+    - type: memory_use_percent
+    - type: processor_use
+
+- platform: uptime
+
+- platform: google_wifi
+
+- platform: template
+  sensors:
+    voltage_chili:
+      friendly_name: "Spenning"
+      unit_of_measurement: 'V'
+      icon_template: mdi:flash
+      value_template: "{{ state_attr('switch.kitchen_plant', 'voltage') }}"
+
+    projector_effect:
+      friendly_name: "Projektor effekt"
+      unit_of_measurement: 'W'
+      icon_template: mdi:projector
+      value_template: "{{ state_attr('switch.projector', 'current_power_w') }}"

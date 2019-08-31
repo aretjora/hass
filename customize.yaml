@@ -4,3 +4,9 @@ switch.kitchen_plant:
 
 switch.drivhus:
   icon: mdi:desk-lamp
+
+switch.projector:
+  icon: mdi:projector
+
+switch.varmepumpe:
+  icon: mdi:radiator
