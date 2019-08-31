@@ -17,6 +17,9 @@ default_config:
 # http:
 #   base_url: example.duckdns.org:8123
 
+recorder:
+  purge_keep_days: 3
+
 automation: !include_dir_merge_list automations/
 binary_sensor: !include binary_sensors.yaml
 group: !include groups.yaml
