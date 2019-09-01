@@ -3,8 +3,6 @@
     projector:
       friendly_name: "Projector"
       icon_template: mdi:projector
-      delay_off:
-        minutes: 1
       value_template: >-
         {{ states('sensor.projector_effect')|float > 1 }}
 
