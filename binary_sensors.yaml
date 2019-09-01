@@ -4,7 +4,7 @@
       friendly_name: "Projector"
       icon_template: mdi:projector
       value_template: >-
-        {{ states('sensor.projector_effect')|float > 1 }}
+        {{ states('sensor.projector_effect')|float > 50 }}
 
 - platform: ping
   name: Saturn
