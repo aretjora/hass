@@ -1,6 +1,6 @@
 
 # Lighting
-- alias: 'Plant Lights On'
+- alias: 'Plant Lights Day'
   trigger:
     platform: time
     at: '07:00:00'
@@ -10,7 +10,7 @@
         - switch.kitchen_plant
         - switch.drivhus
 
-- alias: 'Plant Lights Off'
+- alias: 'Plant Lights Night'
   trigger:
     platform: time
     at: '21:00:00'
@@ -37,7 +37,7 @@
         transition: 1800
 
 # Outdoor Lights
-- alias: 'Outdoor Sunrise'
+- alias: 'Outdoor Day'
   trigger:
     platform: sun
     event: sunrise
@@ -46,7 +46,7 @@
     service: homeassistant.turn_off
     entity_id: light.ute
 
-- alias: 'Outdoor Sunset'
+- alias: 'Outdoor Night'
   trigger:
     platform: sun
     event: sunset
