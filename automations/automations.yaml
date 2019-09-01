@@ -1,26 +1,24 @@
 
 # Lighting
-- alias: 'Chili Lights'
+- alias: 'Plant Lights On'
   trigger:
     platform: time
     at: '07:00:00'
   action:
     - service: switch.turn_on
-      entity_id: switch.kitchen_plant
-    - delay: 14:00:00
-    - service: switch.turn_off
-      entity_id: switch.kitchen_plant
+      entity_id: 
+        - switch.kitchen_plant
+        - switch.drivhus
 
-- alias: 'Drivhus Lights'
+- alias: 'Plant Lights Off'
   trigger:
     platform: time
-    at: '07:00:00'
+    at: '21:00:00'
   action:
-    - service: switch.turn_on
-      entity_id: switch.drivhus
-    - delay: 14:00:00
     - service: switch.turn_off
-      entity_id: switch.drivhus
+      entity_id: 
+        - switch.kitchen_plant
+        - switch.drivhus
 
 - alias: 'Caroline Night'
   trigger:
