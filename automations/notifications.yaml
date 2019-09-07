@@ -27,9 +27,6 @@
     - condition: state
       entity_id: !secret car_external_power
       state: 'off'
-    - condition: numeric_state
-      entity_id: !secret car_battery
-      below: 80
   action:
     - service: !secret notification_user1
       data:
