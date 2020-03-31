@@ -1,0 +1,203 @@
+background: var(--background-image)
+custom_header:
+  background: rgba(155, 155, 155, 0.25)
+  button_text: {options: '{{ hours24 }}:{{ minutesLZ }}'}
+  compact_mode: true
+  voice_hide: true
+resources:
+- {type: module, url: /local/community/mini-graph-card/mini-graph-card-bundle.js}
+- {type: module, url: /local/community/fold-entity-row/fold-entity-row.js}
+- {type: module, url: /local/community/custom-header/custom-header.js}
+title: Home
+views:
+- badges: []
+  cards:
+  - {entity: weather.home, type: weather-forecast}
+  - entities:
+    - {entity: sensor.yr_symbol}
+    - {entity: sensor.yr_temperature}
+    - {entity: sensor.yr_wind_speed}
+    - {entity: air_quality.air_quality_norway}
+    - {entity: sun.sun}
+    show_header_toggle: false
+    title: Vær
+    type: entities
+  - entities:
+    - {entity: sensor.buss_skolebrygga}
+    show_header_toggle: false
+    title: Buss
+    type: entities
+  - entities:
+    - {entity: person.are}
+    show_header_toggle: false
+    type: entities
+  - columns: 4
+    entities:
+    - {entity: sensor.wvwzzz3czje032810_battery_level}
+    - {entity: sensor.wvwzzz3czje032810_fuel_level}
+    - {entity: sensor.wvwzzz3czje032810_charging_time_left}
+    - {entity: sensor.wvwzzz3czje032810_odometer}
+    - {entity: sensor.wvwzzz3czje032810_electric_range}
+    - {entity: sensor.wvwzzz3czje032810_combustion_range}
+    - {entity: sensor.wvwzzz3czje032810_combined_range}
+    - {entity: sensor.wvwzzz3czje032810_last_connected}
+    - {entity: sensor.wvwzzz3czje032810_service_inspection}
+    - {entity: switch.wvwzzz3czje032810_climatisation}
+    - {entity: binary_sensor.wvwzzz3czje032810_parking_light}
+    - {entity: binary_sensor.wvwzzz3czje032810_external_power}
+    show_name: false
+    title: Passat GTE
+    type: glance
+  icon: mdi:home
+  path: home
+  title: Home
+- badges: []
+  cards:
+  - {entity: media_player.kitchen, type: media-control}
+  - {entity: media_player.living_room, type: media-control}
+  - entity: binary_sensor.projector
+    hold_action: {action: more-info}
+    name: Home Theater
+    show_icon: true
+    show_name: true
+    tap_action: {action: more-info}
+    type: entity-button
+  - {entity: media_player.plex_stue, type: media-control}
+  icon: mdi:television-classic
+  path: media
+  title: Media
+- badges: []
+  cards:
+  - {entity: light.gang_inngang, type: light}
+  - {entity: light.soverom_caroline, type: light}
+  - {entity: light.gang_soverom, type: light}
+  - {entity: light.kjellerstue, type: light}
+  - {entity: light.kjokken, type: light}
+  - {entity: light.ute, type: light}
+  - {entity: light.gang_kjeller, type: light}
+  - {entity: light.soverom, type: light}
+  - {entity: light.stue, type: light}
+  - entity: switch.kitchen_plant
+    hold_action: {action: none}
+    name: Kjøkken Planter
+    tap_action: {action: toggle}
+    type: entity-button
+  - entity: switch.drivhus
+    hold_action: {action: none}
+    name: Drivhus Planter
+    tap_action: {action: toggle}
+    type: entity-button
+  - {detail: 5, entity: sensor.varmepumpe_effect, graph: line, name: Varmepumpe, type: sensor,
+    unit: W}
+  - {entity: sensor.server_effect, graph: line, name: Server Rack, type: sensor}
+  icon: mdi:lightbulb
+  path: lighting
+  title: Lighting
+- badges: []
+  cards:
+  - entities:
+    - {entity: binary_sensor.stue_sensor_motion}
+    - {entity: light.stue}
+    - {entity: sensor.stue_temperature}
+    - {entity: sensor.stue_humidity}
+    - {entity: sensor.stue_sensor_light_level}
+    show_icon: true
+    show_name: false
+    show_state: true
+    title: Stue
+    type: glance
+  - entities:
+    - {entity: sensor.barnsoverom_temperature}
+    - {entity: sensor.barnsoverom_humidity}
+    show_name: false
+    title: Soverom Emilie
+    type: glance
+  - entities:
+    - {entity: light.soverom_caroline}
+    - {entity: sensor.hovedsoverom_temperature}
+    - {entity: sensor.hovedsoverom_humidity}
+    - {entity: binary_sensor.vindu_hovedsoverom}
+    show_name: false
+    title: Soverom Caroline
+    type: glance
+  - entities:
+    - {entity: light.gang_inngang}
+    - {entity: sensor.entregang_temperature}
+    - {entity: sensor.entregang_humidity}
+    - {entity: lock.inngangsdor}
+    show_name: false
+    title: Gang Hovedetasje
+    type: glance
+  - entities:
+    - {entity: light.gang_soverom}
+    - {entity: sensor.gang_etg_2_temperature}
+    - {entity: sensor.gang_etg_2_humidity}
+    show_name: false
+    title: Gang 2. Etasje
+    type: glance
+  - entities:
+    - {entity: light.gang_kjeller}
+    - {entity: sensor.kjellergang_temperature}
+    - {entity: sensor.kjellergang_humidity}
+    show_name: false
+    title: Gang Kjeller
+    type: glance
+  - entities:
+    - {entity: light.kjellerstue}
+    - {entity: sensor.kjellerstue_temperature}
+    - {entity: sensor.kjellerstue_humidity}
+    title: Kino
+    type: glance
+  - entities:
+    - {entity: binary_sensor.vindu_kjellerdor}
+    - {entity: binary_sensor.kjellerdor}
+    show_name: false
+    title: Gjesterom
+    type: glance
+  - entities:
+    - {entity: light.ute}
+    - {entity: sensor.dark_sky_temperature}
+    show_name: false
+    title: Ute
+    type: glance
+  icon: mdi:monitor-dashboard
+  path: monitor
+  title: Monitor
+- badges: []
+  cards:
+  - {entity: sensor.voltage_chili, graph: line, name: Voltage, type: sensor, unit: V}
+  - entities:
+    - {entity: sensor.processor_use}
+    - {entity: sensor.memory_use_percent}
+    - {entity: sensor.disk_use_percent_home}
+    - {entity: sensor.uptime}
+    show_header_toggle: false
+    title: Neptune
+    type: entities
+  - entities: [sensor.saturn_cpu_load_total, sensor.saturn_memory_usage_real, sensor.saturn_volume_used_volume_2]
+    head: binary_sensor.saturn
+    type: custom:fold-entity-row
+  - entities: [sensor.mercury_cpu_load_total, sensor.mercury_memory_usage_real, sensor.mercury_volume_used_volume_1]
+    head: binary_sensor.mercury
+    type: custom:fold-entity-row
+  - entities: [sensor.google_wifi_uptime, sensor.google_wifi_last_restart, sensor.google_wifi_current_version,
+      sensor.google_wifi_local_ip]
+    head: {entity: sensor.google_wifi_status, name: Google Wifi}
+    type: custom:fold-entity-row
+  - entities:
+    - {entity: sensor.speedtest_ping}
+    - {entity: sensor.speedtest_download}
+    - {entity: sensor.speedtest_upload}
+    show_header_toggle: false
+    title: Internet
+    type: entities
+  - entities: [automation.startup_notification, automation.caroline_night, automation.morning_notification,
+      automation.car_battery_notification, automation.saturn_offline_notification,
+      automation.hall_lights_day, automation.hall_lights_night, automation.outdoor_day,
+      automation.outdoor_night, automation.plant_lights_day, automation.plant_lights_night,
+      automation.projector_started, automation.projector_stopped]
+    head: {label: Automation, type: section}
+    type: custom:fold-entity-row
+  icon: mdi:home-automation
+  path: system
+  title: System

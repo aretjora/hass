@@ -1,63 +1,26 @@
-homeassistant:
-  name: Home
-  latitude: !secret location_latitude
-  longitude: !secret location_longitude
-  elevation: !secret location_elevation
-  unit_system: metric
-  time_zone: !secret location_tz
-  customize: !include customize.yaml
-  auth_providers:
-   - type: legacy_api_password
-     api_password: !secret http_password
-
-# Configure a default setup of Home Assistant (frontend, api, etc)
+# Core Configuration
+homeassistant: !include includes/homeassistant.yaml
 default_config:
-
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-
-recorder:
-  purge_keep_days: 3
+frontend:
+  themes: !include_dir_merge_named themes
 
 automation: !include_dir_merge_list automations/
-binary_sensor: !include binary_sensors.yaml
-group: !include groups.yaml
 script: !include scripts.yaml
-sensor: !include sensors.yaml
 
-discovery:
-  ignore:
-    - philips_hue
+discovery: !include includes/discovery.yaml
+recorder: !include includes/recorder.yaml
 
-ios:
+air_quality: !include includes/air_quality.yaml
+binary_sensor: !include includes/binary_sensors.yaml
+group: !include includes/groups.yaml
+sensor: !include includes/sensors.yaml
+speedtestdotnet: !include includes/speedtestdotnet.yaml
+media_player: !include includes/media_player.yaml
+hue: !include includes/hue.yaml
+tts: !include includes/tts.yaml
+ios: !include includes/ios.yaml
+apple_tv: !include includes/apple_tv.yaml
+verisure: !include includes/verisure.yaml
 
-apple_tv:
-
-hue:
-  bridges:
-    - host: !secret hue_bridge
-
-media_player:
-  - platform: plex
-
-speedtestdotnet:
-  scan_interval:
-    minutes: 120
-  monitored_conditions:
-    - ping
-    - download
-    - upload
-
-air_quality:
-  - platform: norway_air
-
-# Text to speech
-tts:
-  - platform: google_translate
-
-volkswagencarnet:
-  username: !secret carnet_user
-  password: !secret carnet_pwd
-  scan_interval:
-    minutes: 5
+# Custom modules
+volkswagencarnet: !include includes/volkswagencarnet.yaml

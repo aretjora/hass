@@ -21,7 +21,20 @@
 
 # System metrics
 - platform: synologydsm
+  name: Saturn
   host: !secret synology_host
+  username: !secret synology_user
+  password: !secret synology_pwd
+  monitored_conditions:
+    - cpu_total_load
+    - memory_real_usage
+    - network_up
+    - network_down
+    - volume_percentage_used
+
+- platform: synologydsm
+  name: Mercury
+  host: !secret synology_host2
   username: !secret synology_user
   password: !secret synology_pwd
   monitored_conditions:
@@ -62,3 +75,9 @@
       unit_of_measurement: 'W'
       icon_template: mdi:radiator
       value_template: "{{ state_attr('switch.varmepumpe', 'current_power_w') }}"
+
+    server_effect:
+      friendly_name: "Server effekt"
+      unit_of_measurement: 'W'
+      icon_template: mdi:flash
+      value_template: "{{ state_attr('switch.server_rack', 'current_power_w') }}"

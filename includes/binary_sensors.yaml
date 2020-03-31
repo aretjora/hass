@@ -11,3 +11,9 @@
   host: !secret synology_host
   count: 1
   scan_interval: 3600
+
+- platform: ping
+  name: Mercury
+  host: !secret synology_host2
+  count: 1
+  scan_interval: 3600

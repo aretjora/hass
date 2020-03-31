@@ -1,0 +1,19 @@
+name: Home
+latitude: !secret location_latitude
+longitude: !secret location_longitude
+elevation: !secret location_elevation
+unit_system: metric
+time_zone: !secret location_tz
+customize:
+  # Switches
+  switch.kitchen_plant:
+    icon: mdi:desk-lamp
+
+  switch.drivhus:
+    icon: mdi:desk-lamp
+
+  switch.projector:
+    icon: mdi:projector
+
+  switch.varmepumpe:
+    icon: mdi:radiator

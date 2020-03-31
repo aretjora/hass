@@ -1,10 +1,10 @@
-*
-
-!*.yaml
-!.gitignore
-!*.md
-!automations
-
 secrets.yaml
 known_devices.yaml
 plex.conf
+.ios.conf
+.storage/
+custom_components/
+themes/
+.HA_VERSION
+home-assistant.log
+home-assistant_v2.db
