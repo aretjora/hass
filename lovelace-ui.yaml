@@ -167,23 +167,27 @@ views:
   cards:
   - {entity: sensor.voltage_chili, graph: line, name: Voltage, type: sensor, unit: V}
   - entities:
-    - {entity: sensor.processor_use}
-    - {entity: sensor.memory_use_percent}
-    - {entity: sensor.disk_use_percent_home}
-    - {entity: sensor.uptime}
+    - entities:
+      - {entity: sensor.processor_use}
+      - {entity: sensor.memory_use_percent}
+      - {entity: sensor.disk_use_percent_home}
+      - {entity: sensor.uptime}
+      head: binary_sensor.neptune
+      type: custom:fold-entity-row
+    - entities: [sensor.saturn_cpu_load_total, sensor.saturn_memory_usage_real, sensor.saturn_volume_used_volume_2]
+      head: binary_sensor.saturn
+      type: custom:fold-entity-row
+    - entities: [sensor.mercury_cpu_load_total, sensor.mercury_memory_usage_real,
+        sensor.mercury_volume_used_volume_1]
+      head: binary_sensor.mercury
+      type: custom:fold-entity-row
+    - entities: [sensor.google_wifi_uptime, sensor.google_wifi_last_restart, sensor.google_wifi_current_version,
+        sensor.google_wifi_local_ip]
+      head: {entity: sensor.google_wifi_status, name: Google Wifi}
+      type: custom:fold-entity-row
     show_header_toggle: false
-    title: Neptune
+    title: Network
     type: entities
-  - entities: [sensor.saturn_cpu_load_total, sensor.saturn_memory_usage_real, sensor.saturn_volume_used_volume_2]
-    head: binary_sensor.saturn
-    type: custom:fold-entity-row
-  - entities: [sensor.mercury_cpu_load_total, sensor.mercury_memory_usage_real, sensor.mercury_volume_used_volume_1]
-    head: binary_sensor.mercury
-    type: custom:fold-entity-row
-  - entities: [sensor.google_wifi_uptime, sensor.google_wifi_last_restart, sensor.google_wifi_current_version,
-      sensor.google_wifi_local_ip]
-    head: {entity: sensor.google_wifi_status, name: Google Wifi}
-    type: custom:fold-entity-row
   - entities:
     - {entity: sensor.speedtest_ping}
     - {entity: sensor.speedtest_download}
@@ -191,13 +195,17 @@ views:
     show_header_toggle: false
     title: Internet
     type: entities
-  - entities: [automation.startup_notification, automation.caroline_night, automation.morning_notification,
-      automation.car_battery_notification, automation.saturn_offline_notification,
-      automation.hall_lights_day, automation.hall_lights_night, automation.outdoor_day,
-      automation.outdoor_night, automation.plant_lights_day, automation.plant_lights_night,
-      automation.projector_started, automation.projector_stopped]
-    head: {label: Automation, type: section}
-    type: custom:fold-entity-row
+  - entities:
+    - entities: [automation.startup_notification, automation.caroline_night, automation.morning_notification,
+        automation.car_battery_notification, automation.saturn_offline_notification,
+        automation.hall_lights_day, automation.hall_lights_night, automation.outdoor_day,
+        automation.outdoor_night, automation.plant_lights_day, automation.plant_lights_night,
+        automation.projector_started, automation.projector_stopped]
+      head: {label: Display, type: section}
+      type: custom:fold-entity-row
+    show_header_toggle: false
+    title: Automation
+    type: entities
   icon: mdi:home-automation
   path: system
   title: System
