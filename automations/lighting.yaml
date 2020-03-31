@@ -67,6 +67,7 @@
           - light.gang_inngang
           - light.gang_kjeller
           - light.gang_soverom
+        transition: 4
         brightness_pct: 100
 
 - alias: 'Hall Lights Night'
@@ -80,6 +81,7 @@
           - light.gang_inngang
           - light.gang_kjeller
           - light.gang_soverom
+        transition: 4
         brightness_pct: 30
 
 # Home Theater Lights
