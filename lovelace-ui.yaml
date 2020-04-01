@@ -4,11 +4,6 @@ custom_header:
   button_text: {options: '{{ hours24 }}:{{ minutesLZ }}'}
   compact_mode: true
   voice_hide: true
-resources:
-- {type: module, url: /local/community/mini-graph-card/mini-graph-card-bundle.js}
-- {type: module, url: /local/community/fold-entity-row/fold-entity-row.js}
-- {type: module, url: /local/community/slider-entity-row/slider-entity-row.js}
-- {type: module, url: /local/community/custom-header/custom-header.js}
 title: Home
 views:
 - badges:
@@ -18,21 +13,67 @@ views:
   cards:
   - {entity: weather.home, type: weather-forecast}
   - entities:
-    - {entity: light.stue, type: 'custom:slider-entity-row'}
-    - {entity: light.kjokken, type: 'custom:slider-entity-row'}
-    - {entity: light.soverom, name: Soverom, type: 'custom:slider-entity-row'}
-    - {entity: light.soverom_caroline, type: 'custom:slider-entity-row'}
-    - {entity: light.gang_inngang, type: 'custom:slider-entity-row'}
-    - {entity: light.gang_soverom, type: 'custom:slider-entity-row'}
-    - {entity: light.gang_kjeller, type: 'custom:slider-entity-row'}
-    - {entity: light.kjellerstue, type: 'custom:slider-entity-row'}
-    - {entity: light.ute, type: 'custom:slider-entity-row'}
+    - entities: [light.hue_ambiance_lamp_1, light.hue_ambiance_lamp_2]
+      head: {entity: light.stue, name: Stue, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_ambiance_lamp_3]
+      head: {entity: light.kjokken, name: Kjøkken, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_color_lamp_1]
+      head: {entity: light.soverom, name: Soverom H, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_color_lamp_4]
+      head: {entity: light.soverom_caroline, name: Soverom C, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_white_lamp_1, light.hue_white_lamp_2]
+      head: {entity: light.gang_inngang, name: Inngang, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_white_lamp_4]
+      head: {entity: light.gang_soverom, name: Gang 2.etg, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_white_lamp_3]
+      head: {entity: light.gang_kjeller, name: Gang Kjeller, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_color_lamp_2, light.hue_color_lamp_3, light.hue_lightstrip_plus_1]
+      head: {entity: light.kjellerstue, name: Kjellerstue, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_white_lamp_8, light.hue_white_lamp_7, light.hue_white_lamp_6,
+        light.hue_white_lamp_5]
+      head: {entity: light.ute, name: Ute, type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    show_header_toggle: false
     title: Lys
     type: entities
+  - cards:
+    - cards:
+      - entities: [sensor.stue_temperature, sensor.stue_humidity]
+        font_size: 75
+        name: Stue
+        type: custom:mini-graph-card
+      - entities: [sensor.kjellerstue_temperature, sensor.kjellerstue_humidity]
+        font_size: 75
+        name: Kjellerstue
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    - cards:
+      - entities: [sensor.kjellergang_temperature, sensor.gang_temperature, sensor.gang_etg_2_temperature]
+        font_size: 75
+        name: Gang
+        type: custom:mini-graph-card
+      - entities: [sensor.hovedsoverom_temperature, sensor.barnsoverom_temperature]
+        font_size: 75
+        name: Soverom
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    type: vertical-stack
   - entities:
-    - {entity: switch.drivhus}
-    - {entity: switch.kitchen_plant}
-    title: Planter
+    - entities:
+      - entities: [sensor.drivhus_effect]
+        font_size: 75
+        show: {icon: false, name: false}
+        type: custom:mini-graph-card
+      head: switch.drivhus
+      type: custom:fold-entity-row
     type: entities
   - entities:
     - {entity: sensor.buss_skolebrygga}
@@ -121,6 +162,7 @@ views:
     - {entity: light.kjellerstue}
     - {entity: sensor.kjellerstue_temperature}
     - {entity: sensor.kjellerstue_humidity}
+    show_name: false
     title: Kino
     type: glance
   - entities:
@@ -140,16 +182,34 @@ views:
   title: Monitor
 - badges: []
   cards:
-  - {entity: sensor.voltage_chili, graph: line, name: Voltage, type: sensor, unit: V}
-  - {detail: 5, entity: sensor.varmepumpe_effect, graph: line, name: Varmepumpe, type: sensor,
-    unit: W}
-  - {entity: sensor.server_effect, graph: line, name: Server Rack, type: sensor}
+  - cards:
+    - cards:
+      - entities: [sensor.house_voltage]
+        font_size: 75
+        name: Volt
+        type: custom:mini-graph-card
+      - entities: [sensor.varmepumpe_effect]
+        font_size: 75
+        name: Varmepumpe
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    - cards:
+      - entities: [sensor.server_effect]
+        font_size: 75
+        name: Server
+        type: custom:mini-graph-card
+      - entities: [sensor.kino_effect]
+        font_size: 75
+        name: Kino
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    type: vertical-stack
   - entities:
+    - sensor.uptime
     - entities:
       - {entity: sensor.processor_use}
       - {entity: sensor.memory_use_percent}
       - {entity: sensor.disk_use_percent_home}
-      - {entity: sensor.uptime}
       head: binary_sensor.neptune
       type: custom:fold-entity-row
     - entities: [sensor.saturn_cpu_load_total, sensor.saturn_memory_usage_real, sensor.saturn_volume_used_volume_2]
