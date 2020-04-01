@@ -58,11 +58,23 @@
 
 - platform: template
   sensors:
-    voltage_chili:
+    house_voltage:
       friendly_name: "Spenning"
       unit_of_measurement: 'V'
       icon_template: mdi:flash
-      value_template: "{{ state_attr('switch.kitchen_plant', 'voltage') }}"
+      value_template: "{{ state_attr('switch.varmepumpe', 'voltage') }}"
+
+    drivhus_effect:
+      friendly_name: "Drivhus effekt"
+      unit_of_measurement: 'W'
+      icon_template: mdi:flash
+      value_template: "{{ state_attr('switch.drivhus', 'current_power_w') }}"
+
+    kino_effect:
+      friendly_name: "Kino effekt"
+      unit_of_measurement: 'W'
+      icon_template: mdi:flash
+      value_template: "{{ state_attr('switch.kitchen_plant', 'current_power_w') }}"
 
     projector_effect:
       friendly_name: "Projektor effekt"
@@ -81,3 +93,21 @@
       unit_of_measurement: 'W'
       icon_template: mdi:flash
       value_template: "{{ state_attr('switch.server_rack', 'current_power_w') }}"
+
+- platform: history_stats
+  name: Quarantine Are
+  entity_id: person.are_tjora
+  state: "home"
+  type: ratio
+  duration:
+    days: 14
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Quarantine Monica
+  entity_id: person.monica_hansen
+  state: "home"
+  type: ratio
+  duration:
+    days: 14
+  end: "{{ now() }}"
