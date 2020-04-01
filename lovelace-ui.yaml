@@ -194,13 +194,23 @@ views:
         type: custom:mini-graph-card
       type: horizontal-stack
     - cards:
+      - entities: [sensor.kino_effect]
+        font_size: 75
+        name: Kino
+        type: custom:mini-graph-card
+      - entities: [sensor.projector_effect]
+        font_size: 75
+        name: Projector
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    - cards:
       - entities: [sensor.server_effect]
         font_size: 75
         name: Server
         type: custom:mini-graph-card
-      - entities: [sensor.kino_effect]
+      - entities: [sensor.electricity_price_tostenhagen_54]
         font_size: 75
-        name: Kino
+        name: Strømpris
         type: custom:mini-graph-card
       type: horizontal-stack
     type: vertical-stack
