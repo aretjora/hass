@@ -7,7 +7,7 @@ time_zone: !secret location_tz
 customize:
   # Switches
   switch.kitchen_plant:
-    icon: mdi:desk-lamp
+    icon: mdi:flash
 
   switch.drivhus:
     icon: mdi:desk-lamp

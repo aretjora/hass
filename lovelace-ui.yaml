@@ -7,29 +7,35 @@ custom_header:
 resources:
 - {type: module, url: /local/community/mini-graph-card/mini-graph-card-bundle.js}
 - {type: module, url: /local/community/fold-entity-row/fold-entity-row.js}
+- {type: module, url: /local/community/slider-entity-row/slider-entity-row.js}
 - {type: module, url: /local/community/custom-header/custom-header.js}
 title: Home
 views:
-- badges: []
+- badges:
+  - {entity: person.are_tjora}
+  - {entity: person.monica_hansen}
+  - {entity: sun.sun}
   cards:
   - {entity: weather.home, type: weather-forecast}
   - entities:
-    - {entity: sensor.yr_symbol}
-    - {entity: sensor.yr_temperature}
-    - {entity: sensor.yr_wind_speed}
-    - {entity: air_quality.air_quality_norway}
-    - {entity: sun.sun}
-    show_header_toggle: false
-    title: Vær
+    - {entity: light.stue, type: 'custom:slider-entity-row'}
+    - {entity: light.kjokken, type: 'custom:slider-entity-row'}
+    - {entity: light.soverom, name: Soverom, type: 'custom:slider-entity-row'}
+    - {entity: light.soverom_caroline, type: 'custom:slider-entity-row'}
+    - {entity: light.gang_inngang, type: 'custom:slider-entity-row'}
+    - {entity: light.gang_soverom, type: 'custom:slider-entity-row'}
+    - {entity: light.gang_kjeller, type: 'custom:slider-entity-row'}
+    - {entity: light.kjellerstue, type: 'custom:slider-entity-row'}
+    - {entity: light.ute, type: 'custom:slider-entity-row'}
+    title: Lys
+    type: entities
+  - entities:
+    - {entity: switch.drivhus}
+    - {entity: switch.kitchen_plant}
+    title: Planter
     type: entities
   - entities:
     - {entity: sensor.buss_skolebrygga}
-    show_header_toggle: false
-    title: Buss
-    type: entities
-  - entities:
-    - {entity: person.are}
-    show_header_toggle: false
     type: entities
   - columns: 4
     entities:
@@ -40,10 +46,6 @@ views:
     - {entity: sensor.wvwzzz3czje032810_electric_range}
     - {entity: sensor.wvwzzz3czje032810_combustion_range}
     - {entity: sensor.wvwzzz3czje032810_combined_range}
-    - {entity: sensor.wvwzzz3czje032810_last_connected}
-    - {entity: sensor.wvwzzz3czje032810_service_inspection}
-    - {entity: switch.wvwzzz3czje032810_climatisation}
-    - {entity: binary_sensor.wvwzzz3czje032810_parking_light}
     - {entity: binary_sensor.wvwzzz3czje032810_external_power}
     show_name: false
     title: Passat GTE
@@ -66,33 +68,6 @@ views:
   icon: mdi:television-classic
   path: media
   title: Media
-- badges: []
-  cards:
-  - {entity: light.gang_inngang, type: light}
-  - {entity: light.soverom_caroline, type: light}
-  - {entity: light.gang_soverom, type: light}
-  - {entity: light.kjellerstue, type: light}
-  - {entity: light.kjokken, type: light}
-  - {entity: light.ute, type: light}
-  - {entity: light.gang_kjeller, type: light}
-  - {entity: light.soverom, type: light}
-  - {entity: light.stue, type: light}
-  - entity: switch.kitchen_plant
-    hold_action: {action: none}
-    name: Kjøkken Planter
-    tap_action: {action: toggle}
-    type: entity-button
-  - entity: switch.drivhus
-    hold_action: {action: none}
-    name: Drivhus Planter
-    tap_action: {action: toggle}
-    type: entity-button
-  - {detail: 5, entity: sensor.varmepumpe_effect, graph: line, name: Varmepumpe, type: sensor,
-    unit: W}
-  - {entity: sensor.server_effect, graph: line, name: Server Rack, type: sensor}
-  icon: mdi:lightbulb
-  path: lighting
-  title: Lighting
 - badges: []
   cards:
   - entities:
@@ -166,6 +141,9 @@ views:
 - badges: []
   cards:
   - {entity: sensor.voltage_chili, graph: line, name: Voltage, type: sensor, unit: V}
+  - {detail: 5, entity: sensor.varmepumpe_effect, graph: line, name: Varmepumpe, type: sensor,
+    unit: W}
+  - {entity: sensor.server_effect, graph: line, name: Server Rack, type: sensor}
   - entities:
     - entities:
       - {entity: sensor.processor_use}
@@ -195,17 +173,19 @@ views:
     show_header_toggle: false
     title: Internet
     type: entities
-  - entities:
-    - entities: [automation.startup_notification, automation.caroline_night, automation.morning_notification,
-        automation.car_battery_notification, automation.saturn_offline_notification,
-        automation.hall_lights_day, automation.hall_lights_night, automation.outdoor_day,
-        automation.outdoor_night, automation.plant_lights_day, automation.plant_lights_night,
-        automation.projector_started, automation.projector_stopped]
-      head: {label: Display, type: section}
-      type: custom:fold-entity-row
-    show_header_toggle: false
-    title: Automation
-    type: entities
   icon: mdi:home-automation
   path: system
   title: System
+- badges: []
+  cards:
+  - entities: [automation.caroline_night, automation.hall_lights_day, automation.hall_lights_night,
+      automation.outdoor_day, automation.outdoor_night, automation.plant_lights_day,
+      automation.plant_lights_night, automation.projector_started, automation.projector_stopped]
+    title: Automations
+    type: entities
+  - entities: [automation.startup_notification, automation.morning_notification, automation.car_battery_notification]
+    title: Notifications
+    type: entities
+  icon: mdi:robot
+  path: automation
+  title: Automation

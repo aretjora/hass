@@ -9,6 +9,8 @@ script: !include scripts.yaml
 
 discovery: !include includes/discovery.yaml
 recorder: !include includes/recorder.yaml
+person: !include includes/persons.yaml
+notify: !include includes/notify.yaml
 
 air_quality: !include includes/air_quality.yaml
 binary_sensor: !include includes/binary_sensors.yaml
@@ -19,8 +21,8 @@ media_player: !include includes/media_player.yaml
 hue: !include includes/hue.yaml
 tts: !include includes/tts.yaml
 ios: !include includes/ios.yaml
-apple_tv: !include includes/apple_tv.yaml
 verisure: !include includes/verisure.yaml
+apple_tv:
 
 # Custom modules
 volkswagencarnet: !include includes/volkswagencarnet.yaml
