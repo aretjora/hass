@@ -26,3 +26,9 @@ customize:
 
   binary_sensor.kjellerdor:
     icon: mdi:door-open
+
+  binary_sensor.updater:
+    icon: mdi:update
+
+  binary_sensor.motion_detected_last_hour:
+    icon: mdi:motion-sensor
