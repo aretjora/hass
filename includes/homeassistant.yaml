@@ -17,3 +17,12 @@ customize:
 
   switch.varmepumpe:
     icon: mdi:radiator
+
+  binary_sensor.vindu_kjellerdor:
+    icon: mdi:window-open
+
+  binary_sensor.vindu_hovedsoverom:
+    icon: mdi:window-open
+
+  binary_sensor.kjellerdor:
+    icon: mdi:door-open
