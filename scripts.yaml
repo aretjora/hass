@@ -1,0 +1,13 @@
+turn_off_everything_non_automatic:
+  alias: Turn off everything
+  sequence:
+  - service: light.turn_off
+    data:
+      transition: 4
+      entity_id:
+      - light.stue
+      - light.kjokken
+      - light.soverom
+      - light.soverom_caroline
+      - light.kjellerstue
+      - light.kjellerom

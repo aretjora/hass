@@ -4,19 +4,19 @@
       friendly_name: "Projektor"
       icon_template: mdi:projector
       value_template: >-
-        {{ states('sensor.projector_effect')|float > 50 }}
-
-    cinema:
-      friendly_name: "Kino"
-      icon_template: mdi:music
-      value_template: >-
-        {{ states('sensor.kino_effect')|float > 50 }}
+        {{ states('sensor.projector_watts')|float > 50 }}
 
     varmepumpe:
       friendly_name: "Varmepumpe"
       icon_template: mdi:radiator
       value_template: >-
-        {{ states('sensor.varmepumpe_effect')|float > 50 }}
+        {{ states('sensor.varmepumpe_watts')|float > 20 }}
+
+    vaskemaskin:
+      friendly_name: "Vaskemaskin"
+      icon_template: mdi:washing-machine
+      value_template: >-
+        {{ states('sensor.vaskemaskin_watts')|float > 5 }}
 
     motion_detected:
       friendly_name: Any motion detected

@@ -32,3 +32,6 @@ customize:
 
   binary_sensor.motion_detected_last_hour:
     icon: mdi:motion-sensor
+
+  media_player.tv_stue:
+    icon: mdi:television-classic

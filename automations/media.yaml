@@ -1,0 +1,47 @@
+- alias: "Media: TV has started"
+  trigger:
+    platform: state
+    entity_id: media_player.tv_stue
+    from: "off"
+    to: "on"
+  action:
+    service: input_datetime.set_datetime
+    entity_id: input_datetime.tv_started
+    data_template:
+      datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+
+- alias: "Media: TV is done"
+  trigger:
+    platform: state
+    entity_id: media_player.tv_stue
+    from: "on"
+    to: "off"
+  action:
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.tv_done
+      data_template:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+
+- alias: "Media: Projector has started"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.projector
+    from: "off"
+    to: "on"
+  action:
+    service: input_datetime.set_datetime
+    entity_id: input_datetime.projector_started
+    data_template:
+      datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+
+- alias: "Media: Projector is done"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.projector
+    from: "on"
+    to: "off"
+  action:
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.projector_done
+      data_template:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"

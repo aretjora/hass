@@ -53,6 +53,7 @@
     - type: processor_use
 
 - platform: uptime
+  unit_of_measurement: hours
 
 - platform: google_wifi
 
@@ -64,50 +65,86 @@
       icon_template: mdi:flash
       value_template: "{{ state_attr('switch.varmepumpe', 'voltage') }}"
 
-    drivhus_effect:
-      friendly_name: "Drivhus effekt"
+    drivhus_watts:
+      friendly_name: "Drivhus usage"
       unit_of_measurement: 'W'
       icon_template: mdi:flash
       value_template: "{{ state_attr('switch.drivhus', 'current_power_w') }}"
 
-    kino_effect:
-      friendly_name: "Kino effekt"
+    vaskemaskin_watts:
+      friendly_name: "Vaskemaskin usage"
       unit_of_measurement: 'W'
-      icon_template: mdi:flash
-      value_template: "{{ state_attr('switch.kitchen_plant', 'current_power_w') }}"
+      icon_template: mdi:washing-machine
+      value_template: "{{ state_attr('switch.vaskemaskin', 'current_power_w') }}"
 
-    projector_effect:
-      friendly_name: "Projektor effekt"
+    vaskemaskin_stats:
+      friendly_name: "Vaskemaskin stats"
+      icon_template: mdi:washing-machine
+      value_template: >-
+        {% set hours = states.sensor.hours_washing_machine_has_been_on_last_7_days.attributes.value %}
+        {% set kwh = state_attr("switch.vaskemaskin", "today_energy_kwh") | float %} 
+        {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
+        {{hours}} - {{ cost_today | round(2) }} kr - {{ kwh }} kWh
+
+    projector_watts:
+      friendly_name: "Projektor usage"
       unit_of_measurement: 'W'
       icon_template: mdi:projector
       value_template: "{{ state_attr('switch.projector', 'current_power_w') }}"
 
-    varmepumpe_effect:
-      friendly_name: "Varmepumpe effekt"
+    varmepumpe_watts:
+      friendly_name: "Varmepumpe usage"
       unit_of_measurement: 'W'
       icon_template: mdi:radiator
       value_template: "{{ state_attr('switch.varmepumpe', 'current_power_w') }}"
 
-    server_effect:
-      friendly_name: "Server effekt"
+    varmepumpe_stats:
+      friendly_name: "Varmepumpe stats"
+      icon_template: mdi:radiator
+      value_template: >-
+        {% set hours = states.sensor.hours_heat_pump_has_been_on_last_7_days.attributes.value %}
+        {% set kwh = state_attr("switch.varmepumpe", "today_energy_kwh") | float %} 
+        {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
+        {{hours}} - {{ cost_today | round(2) }} kr - {{ kwh }} kWh
+
+    server_watts:
+      friendly_name: "Server usage"
       unit_of_measurement: 'W'
       icon_template: mdi:flash
       value_template: "{{ state_attr('switch.server_rack', 'current_power_w') }}"
 
 - platform: history_stats
-  name: Quarantine Are
-  entity_id: person.are_tjora
-  state: "home"
-  type: ratio
+  name: Hours TV has been on last 7 days
+  entity_id: media_player.stue_tv
+  state: "on"
+  type: time
   duration:
-    days: 14
+    days: 7
   end: "{{ now() }}"
 
 - platform: history_stats
-  name: Quarantine Monica
-  entity_id: person.monica_hansen
-  state: "home"
-  type: ratio
+  name: Hours washing machine has been on last 7 days
+  entity_id: binary_sensor.vaskemaskin
+  state: "on"
+  type: time
   duration:
-    days: 14
+    days: 7
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Hours heat pump has been on last 7 days
+  entity_id: binary_sensor.varmepumpe
+  state: "on"
+  type: time
+  duration:
+    days: 7
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Hours heat pump has been on last 7 days
+  entity_id: binary_sensor.projector
+  state: "on"
+  type: time
+  duration:
+    days: 7
   end: "{{ now() }}"

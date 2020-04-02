@@ -1,0 +1,9 @@
+cinema_mode:
+  name: Cinema Mode
+  icon: mdi:projector
+  initial: "off"
+
+gaming_mode:
+  name: Gaming Mode
+  icon: mdi:gamepad-variant
+  initial: "off"

@@ -1,0 +1,39 @@
+washing_machine_started:
+  name: Washing machine last started
+  has_date: true
+  has_time: true
+
+washing_machine_done:
+  name: Washing machine last done
+  has_date: true
+  has_time: true
+
+heat_pump_started:
+  name: Heat pump last started
+  has_date: true
+  has_time: true
+
+heat_pump_done:
+  name: Heat pump last done
+  has_date: true
+  has_time: true
+
+tv_started:
+  name: TV last started
+  has_date: true
+  has_time: true
+
+tv_done:
+  name: TV last done
+  has_date: true
+  has_time: true
+
+projector_started:
+  name: Projector last started
+  has_date: true
+  has_time: true
+
+projector_done:
+  name: Projector last done
+  has_date: true
+  has_time: true
