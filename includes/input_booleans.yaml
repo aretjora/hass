@@ -7,3 +7,11 @@ gaming_mode:
   name: Gaming Mode
   icon: mdi:gamepad-variant
   initial: "off"
+
+guest_mode:
+  name: Guest mode
+  icon: mdi:human-male-female
+  
+sleep_mode:
+  name: Sleep mode
+  icon: mdi:bed-king

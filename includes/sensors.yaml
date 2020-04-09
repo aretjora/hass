@@ -84,6 +84,37 @@
         {% set hours = states.sensor.hours_washing_machine_has_been_on_last_7_days.attributes.value %}
         {% set kwh = state_attr("switch.vaskemaskin", "today_energy_kwh") | float %} 
         {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
+        Forbruk idag: {{ kwh }} kWh ({{ cost_today | round(2) }} kr) 
+        Siste uke: {{hours}}
+
+    vaskemaskin_today:
+      friendly_name: "Forbruk idag"
+      icon_template: mdi:washing-machine
+      value_template: >-
+        {% set kwh = state_attr("switch.vaskemaskin", "today_energy_kwh") | float %} 
+        {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
+        Forbruk idag: {{ kwh }} kWh ({{ cost_today | round(2) }} kr) 
+
+    vaskemaskin_week:
+      friendly_name: "Siste uke"
+      icon_template: mdi:washing-machine
+      value_template: >-
+        {% set hours = states.sensor.hours_washing_machine_has_been_on_last_7_days.attributes.value %}
+        Siste uke: {{hours}}
+
+    torketrommel_watts:
+      friendly_name: "Tørketrommel usage"
+      unit_of_measurement: 'W'
+      icon_template: mdi:tumble-dryer
+      value_template: "{{ state_attr('switch.dryer', 'current_power_w') }}"
+
+    torketrommel_stats:
+      friendly_name: "Tørketrommel stats"
+      icon_template: mdi:tumble-dryer
+      value_template: >-
+        {% set hours = states.sensor.hours_dryer_has_been_on_last_7_days.attributes.value %}
+        {% set kwh = state_attr("switch.dryer", "today_energy_kwh") | float %} 
+        {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
         {{hours}} - {{ cost_today | round(2) }} kr - {{ kwh }} kWh
 
     projector_watts:
@@ -132,6 +163,15 @@
   end: "{{ now() }}"
 
 - platform: history_stats
+  name: Hours dryer has been on last 7 days
+  entity_id: binary_sensor.torketrommel
+  state: "on"
+  type: time
+  duration:
+    days: 7
+  end: "{{ now() }}"
+
+- platform: history_stats
   name: Hours heat pump has been on last 7 days
   entity_id: binary_sensor.varmepumpe
   state: "on"
@@ -141,7 +181,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
-  name: Hours heat pump has been on last 7 days
+  name: Hours projector has been on last 7 days
   entity_id: binary_sensor.projector
   state: "on"
   type: time

@@ -16,13 +16,19 @@
       friendly_name: "Vaskemaskin"
       icon_template: mdi:washing-machine
       value_template: >-
-        {{ states('sensor.vaskemaskin_watts')|float > 5 }}
+        {{ states('sensor.vaskemaskin_watts')|float > 3 }}
+
+    torketrommel:
+      friendly_name: "Tørketrommel"
+      icon_template: mdi:tumble-dryer
+      value_template: >-
+        {{ states('sensor.torketrommel_watts')|float > 3 }}
 
     motion_detected:
       friendly_name: Any motion detected
       icon_template: mdi:motion-sensor
       value_template: >-
-        {{ is_state("binary_sensor.binary_sensor.stue_sensor_motion", "on")}}
+        {{ is_state("binary_sensor.stue_sensor_motion", "on")}}
 
     motion_detected_last_hour:
       friendly_name: Any motion detected in last hour
