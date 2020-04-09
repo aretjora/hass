@@ -1,0 +1,6 @@
+- platform: group
+  name: Outside lights
+  entities:
+    - light.gang_inngang
+    - light.gang_soverom
+    - light.gang_kjeller
