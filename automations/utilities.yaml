@@ -26,6 +26,34 @@
         title: "Utilities"
         message: "Vaskemaskin er ferdig 👚👕"
 
+- alias: "Utilities: dryer has started"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.torketrommel
+    from: "off"
+    to: "on"
+  action:
+    service: input_datetime.set_datetime
+    entity_id: input_datetime.dryer_started
+    data_template:
+      datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+
+- alias: "Utilities: dryer is done"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.torketrommel
+    from: "on"
+    to: "off"
+  action:
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.dryer_done
+      data_template:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+    - service: notify.all_iphones
+      data:
+        title: "Utilities"
+        message: "Tørketrommel er ferdig 👚👕"
+
 - alias: "Utilities: heat pump has started"
   trigger:
     platform: state
