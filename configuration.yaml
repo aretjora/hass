@@ -18,6 +18,7 @@ air_quality: !include includes/air_quality.yaml
 binary_sensor: !include includes/binary_sensors.yaml
 group: !include includes/groups.yaml
 sensor: !include includes/sensors.yaml
+light: !include includes/lights.yaml
 speedtestdotnet: !include includes/speedtestdotnet.yaml
 media_player: !include includes/media_player.yaml
 hue: !include includes/hue.yaml
