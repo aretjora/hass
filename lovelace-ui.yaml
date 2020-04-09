@@ -14,32 +14,36 @@ views:
   - {entity: weather.home, type: weather-forecast}
   - entities:
     - entities: [light.hue_ambiance_lamp_1, light.hue_ambiance_lamp_2]
-      head: {entity: light.stue, name: Stue, type: 'custom:slider-entity-row'}
+      head: {entity: light.stue, icon: 'mdi:sofa', name: Stue, type: 'custom:slider-entity-row'}
       type: custom:fold-entity-row
     - entities: [light.hue_ambiance_lamp_3]
-      head: {entity: light.kjokken, name: Kjøkken, type: 'custom:slider-entity-row'}
+      head: {entity: light.kjokken, icon: 'mdi:fridge-outline', name: Kjøkken, type: 'custom:slider-entity-row'}
       type: custom:fold-entity-row
     - entities: [light.hue_color_lamp_1]
-      head: {entity: light.soverom, name: Soverom H, type: 'custom:slider-entity-row'}
+      head: {entity: light.soverom, icon: 'mdi:bed-king', name: Soverom M, type: 'custom:slider-entity-row'}
       type: custom:fold-entity-row
     - entities: [light.hue_color_lamp_4]
-      head: {entity: light.soverom_caroline, name: Soverom C, type: 'custom:slider-entity-row'}
+      head: {entity: light.soverom_caroline, icon: 'mdi:bed-empty', name: Soverom
+          C, type: 'custom:slider-entity-row'}
       type: custom:fold-entity-row
-    - entities: [light.hue_white_lamp_1, light.hue_white_lamp_2]
-      head: {entity: light.gang_inngang, name: Inngang, type: 'custom:slider-entity-row'}
+    - entities: [light.hue_white_lamp_1_2]
+      head: {entity: light.soverom_emilie, icon: 'mdi:bed-empty', name: Soverom E,
+        type: 'custom:slider-entity-row'}
       type: custom:fold-entity-row
-    - entities: [light.hue_white_lamp_4]
-      head: {entity: light.gang_soverom, name: Gang 2.etg, type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.hue_white_lamp_3]
-      head: {entity: light.gang_kjeller, name: Gang Kjeller, type: 'custom:slider-entity-row'}
+    - entities: [light.color_light_1, light.color_temperature_light_1, light.color_temperature_light_2]
+      head: {entity: light.kjellerrom, icon: 'mdi:bed-empty', name: Gjesterom, type: 'custom:slider-entity-row'}
       type: custom:fold-entity-row
     - entities: [light.hue_color_lamp_2, light.hue_color_lamp_3, light.hue_lightstrip_plus_1]
-      head: {entity: light.kjellerstue, name: Kjellerstue, type: 'custom:slider-entity-row'}
+      head: {entity: light.kjellerstue, icon: 'mdi:projector-screen', name: Kjellerstue,
+        type: 'custom:slider-entity-row'}
+      type: custom:fold-entity-row
+    - entities: [light.hue_white_lamp_1, light.hue_white_lamp_2, light.hue_white_lamp_4,
+        light.hue_white_lamp_3]
+      head: {entity: light.outside_lights, icon: 'mdi:home-outline', name: Gang, type: 'custom:slider-entity-row'}
       type: custom:fold-entity-row
     - entities: [light.hue_white_lamp_8, light.hue_white_lamp_7, light.hue_white_lamp_6,
         light.hue_white_lamp_5]
-      head: {entity: light.ute, name: Ute, type: 'custom:slider-entity-row'}
+      head: {entity: light.ute, icon: 'mdi:terrain', name: Ute, type: 'custom:slider-entity-row'}
       type: custom:fold-entity-row
     show_header_toggle: false
     title: Lys
@@ -66,13 +70,14 @@ views:
         type: custom:mini-graph-card
       type: horizontal-stack
     type: vertical-stack
-  - columns: 5
+  - columns: 6
     entities:
-    - {entity: binary_sensor.cinema}
+    - {entity: media_player.tv_stue}
     - {entity: binary_sensor.projector}
     - {entity: binary_sensor.varmepumpe}
+    - {entity: binary_sensor.vaskemaskin}
+    - {entity: binary_sensor.torketrommel}
     - {entity: binary_sensor.updater}
-    - {entity: binary_sensor.motion_detected_last_hour}
     show_icon: true
     show_name: false
     show_state: false
@@ -80,7 +85,7 @@ views:
     type: glance
   - entities:
     - entities:
-      - entities: [sensor.drivhus_effect]
+      - entities: [sensor.drivhus_watts]
         font_size: 75
         show: {icon: false, name: false}
         type: custom:mini-graph-card
@@ -110,14 +115,7 @@ views:
   cards:
   - {entity: media_player.kitchen, type: media-control}
   - {entity: media_player.living_room, type: media-control}
-  - entity: binary_sensor.projector
-    hold_action: {action: more-info}
-    icon_height: 50px
-    name: Home Theater
-    show_icon: true
-    show_name: true
-    tap_action: {action: more-info}
-    type: entity-button
+  - {entity: media_player.plex_plex_for_apple_tv_stue, type: media-control}
   icon: mdi:television-classic
   path: media
   title: Media
@@ -135,6 +133,7 @@ views:
     title: Stue
     type: glance
   - entities:
+    - {entity: light.soverom_emilie}
     - {entity: sensor.barnsoverom_temperature}
     - {entity: sensor.barnsoverom_humidity}
     show_name: false
@@ -178,6 +177,7 @@ views:
     title: Kino
     type: glance
   - entities:
+    - {entity: light.kjellerrom}
     - {entity: binary_sensor.vindu_kjellerdor}
     - {entity: binary_sensor.kjellerdor}
     show_name: false
@@ -198,28 +198,34 @@ views:
     - cards:
       - entities: [sensor.house_voltage]
         font_size: 75
-        name: Volt
+        name: Spenning
         type: custom:mini-graph-card
-      - entities: [sensor.varmepumpe_effect]
+      - entities: [sensor.server_watts]
+        font_size: 75
+        name: Server
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    - cards:
+      - entities: [sensor.torketrommel_watts]
+        font_size: 75
+        name: Tørketrommel
+        type: custom:mini-graph-card
+      - entities: [sensor.projector_watts]
+        font_size: 75
+        name: Projektor
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    - cards:
+      - entities: [sensor.vaskemaskin_watts]
+        font_size: 75
+        name: Vaskemaskin
+        type: custom:mini-graph-card
+      - entities: [sensor.varmepumpe_watts]
         font_size: 75
         name: Varmepumpe
         type: custom:mini-graph-card
       type: horizontal-stack
     - cards:
-      - entities: [sensor.kino_effect]
-        font_size: 75
-        name: Kino
-        type: custom:mini-graph-card
-      - entities: [sensor.projector_effect]
-        font_size: 75
-        name: Projector
-        type: custom:mini-graph-card
-      type: horizontal-stack
-    - cards:
-      - entities: [sensor.server_effect]
-        font_size: 75
-        name: Server
-        type: custom:mini-graph-card
       - entities: [sensor.electricity_price_tostenhagen_54]
         font_size: 75
         name: Strømpris
@@ -255,6 +261,13 @@ views:
     show_header_toggle: false
     title: Internet
     type: entities
+  - entities:
+    - {entity: sensor.varmepumpe_stats, name: Varmepumpe}
+    - {entity: sensor.vaskemaskin_stats, name: Vaskemaskin}
+    - {entity: sensor.torketrommel_stats}
+    show_header_toggle: false
+    title: Utilities Stats
+    type: entities
   icon: mdi:home-automation
   path: system
   title: System
@@ -263,10 +276,22 @@ views:
   - entities: [automation.caroline_night, automation.hall_lights_day, automation.hall_lights_night,
       automation.outdoor_day, automation.outdoor_night, automation.plant_lights_day,
       automation.plant_lights_night, automation.projector_started, automation.projector_stopped]
-    title: Automations
+    title: Lighting
     type: entities
-  - entities: [automation.startup_notification, automation.morning_notification, automation.car_battery_notification]
+  - entities:
+    - {entity: automation.startup_notification}
+    - {entity: automation.morning_notification}
+    - {entity: automation.car_battery_notification}
+    - {entity: automation.mercury_offline_notification}
+    - {entity: automation.saturn_offline_notification}
     title: Notifications
+    type: entities
+  - entities:
+    - {entity: automation.utilities_heat_pump_has_started}
+    - {entity: automation.utilities_heat_pump_is_done}
+    - {entity: automation.utilities_washing_machine_has_started}
+    - {entity: automation.utilities_washing_machine_is_done}
+    title: Utilities
     type: entities
   icon: mdi:robot
   path: automation
