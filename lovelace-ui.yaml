@@ -12,42 +12,21 @@ views:
   - {entity: sun.sun}
   cards:
   - {entity: weather.home, type: weather-forecast}
-  - entities:
-    - entities: [light.hue_ambiance_lamp_1, light.hue_ambiance_lamp_2]
-      head: {entity: light.stue, icon: 'mdi:sofa', name: Stue, type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.hue_ambiance_lamp_3]
-      head: {entity: light.kjokken, icon: 'mdi:fridge-outline', name: Kjøkken, type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.hue_color_lamp_1]
-      head: {entity: light.soverom, icon: 'mdi:bed-king', name: Soverom M, type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.hue_color_lamp_4]
-      head: {entity: light.soverom_caroline, icon: 'mdi:bed-empty', name: Soverom
-          C, type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.hue_white_lamp_1_2]
-      head: {entity: light.soverom_emilie, icon: 'mdi:bed-empty', name: Soverom E,
-        type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.color_light_1, light.color_temperature_light_1, light.color_temperature_light_2]
-      head: {entity: light.kjellerrom, icon: 'mdi:bed-empty', name: Gjesterom, type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.hue_color_lamp_2, light.hue_color_lamp_3, light.hue_lightstrip_plus_1]
-      head: {entity: light.kjellerstue, icon: 'mdi:projector-screen', name: Kjellerstue,
-        type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.hue_white_lamp_1, light.hue_white_lamp_2, light.hue_white_lamp_4,
-        light.hue_white_lamp_3]
-      head: {entity: light.outside_lights, icon: 'mdi:home-outline', name: Gang, type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    - entities: [light.hue_white_lamp_8, light.hue_white_lamp_7, light.hue_white_lamp_6,
-        light.hue_white_lamp_5]
-      head: {entity: light.ute, icon: 'mdi:terrain', name: Ute, type: 'custom:slider-entity-row'}
-      type: custom:fold-entity-row
-    show_header_toggle: false
+  - columns: 3
+    entities:
+    - {entity: light.living_room_lights}
+    - {entity: light.kitchen_lights}
+    - {entity: light.office_lights}
+    - {entity: light.bedroom_lights}
+    - {entity: light.bedroom_c_lights}
+    - {entity: light.bedroom_e_lights}
+    - {entity: light.home_theater_lights}
+    - {entity: light.outside_lights}
+    - {entity: light.hall_lights}
+    - {entity: light.guest_room_lights}
+    show_state: false
     title: Lys
-    type: entities
+    type: glance
   - cards:
     - cards:
       - entities: [sensor.stue_temperature, sensor.stue_humidity]
@@ -95,19 +74,6 @@ views:
   - entities:
     - {entity: sensor.buss_skolebrygga}
     type: entities
-  - columns: 4
-    entities:
-    - {entity: sensor.wvwzzz3czje032810_battery_level}
-    - {entity: sensor.wvwzzz3czje032810_fuel_level}
-    - {entity: sensor.wvwzzz3czje032810_charging_time_left}
-    - {entity: sensor.wvwzzz3czje032810_odometer}
-    - {entity: sensor.wvwzzz3czje032810_electric_range}
-    - {entity: sensor.wvwzzz3czje032810_combustion_range}
-    - {entity: sensor.wvwzzz3czje032810_combined_range}
-    - {entity: binary_sensor.wvwzzz3czje032810_external_power}
-    show_name: false
-    title: Passat GTE
-    type: glance
   icon: mdi:home
   path: home
   title: Home
@@ -240,11 +206,11 @@ views:
       - {entity: sensor.disk_use_percent_home}
       head: binary_sensor.neptune
       type: custom:fold-entity-row
-    - entities: [sensor.saturn_cpu_load_total, sensor.saturn_memory_usage_real, sensor.saturn_volume_used_volume_2]
+    - entities: [sensor.saturn_cpu_load_total, sensor.saturn_memory_usage_real, sensor.saturn_volume_2_volume_used]
       head: binary_sensor.saturn
       type: custom:fold-entity-row
     - entities: [sensor.mercury_cpu_load_total, sensor.mercury_memory_usage_real,
-        sensor.mercury_volume_used_volume_1]
+        sensor.mercury_volume_1_volume_used]
       head: binary_sensor.mercury
       type: custom:fold-entity-row
     - entities: [sensor.google_wifi_uptime, sensor.google_wifi_last_restart, sensor.google_wifi_current_version,
@@ -261,13 +227,19 @@ views:
     show_header_toggle: false
     title: Internet
     type: entities
-  - entities:
-    - {entity: sensor.varmepumpe_stats, name: Varmepumpe}
-    - {entity: sensor.vaskemaskin_stats, name: Vaskemaskin}
-    - {entity: sensor.torketrommel_stats}
-    show_header_toggle: false
+  - columns: 2
+    entities:
+    - {entity: sensor.hours_washing_machine_has_been_on_last_7_days, icon: 'mdi:washing-machine',
+      name: Vaskemaskin}
+    - {entity: sensor.hours_dryer_has_been_on_last_7_days, icon: 'mdi:tumble-dryer',
+      name: Tørketrommel}
+    - {entity: sensor.hours_heat_pump_has_been_on_last_7_days, icon: 'mdi:radiator',
+      name: Varmepumpe}
+    - {entity: sensor.hours_tv_has_been_on_last_7_days, icon: 'mdi:television', name: Tv}
+    - {entity: sensor.hours_projector_has_been_on_last_7_days, icon: 'mdi:projector',
+      name: Projector}
     title: Utilities Stats
-    type: entities
+    type: glance
   icon: mdi:home-automation
   path: system
   title: System
