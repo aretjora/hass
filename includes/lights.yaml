@@ -1,6 +1,59 @@
 - platform: group
+  name: Hall lights
+  entities:
+    - light.hue_white_lamp_1
+    - light.hue_white_lamp_2
+    - light.hue_white_lamp_4
+    - light.hue_white_lamp_3
+
+- platform: group
+  name: Living room lights
+  entities:
+    - light.hue_ambiance_lamp_1
+    - light.hue_ambiance_lamp_2
+
+- platform: group
+  name: Kitchen lights
+  entities:
+    - light.hue_ambiance_lamp_3
+
+- platform: group
+  name: Bedroom lights
+  entities:
+    - light.soverom
+
+- platform: group
+  name: Bedroom C lights
+  entities:
+    - light.hue_color_lamp_4
+
+- platform: group
+  name: Bedroom E lights
+  entities:
+    - light.hue_white_lamp_1_2
+
+- platform: group
+  name: Office lights
+  entities:
+    - light.hue_color_lamp_2
+
+- platform: group
+  name: Home theater lights
+  entities:
+    - light.hue_color_lamp_3
+    - light.hue_lightstrip_plus_1
+
+- platform: group
+  name: Guest room lights
+  entities:
+    - light.color_light_1
+    - light.color_temperature_light_1
+    - light.color_temperature_light_2
+
+- platform: group
   name: Outside lights
   entities:
-    - light.gang_inngang
-    - light.gang_soverom
-    - light.gang_kjeller
+    - light.hue_white_lamp_8
+    - light.hue_white_lamp_7
+    - light.hue_white_lamp_6
+    - light.hue_white_lamp_5
