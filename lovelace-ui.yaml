@@ -29,6 +29,12 @@ views:
     type: glance
   - cards:
     - cards:
+      - entities: [sensor.kitchengarden_temperature]
+        font_size: 75
+        name: Ute
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    - cards:
       - entities: [sensor.stue_temperature, sensor.stue_humidity]
         font_size: 75
         name: Stue
@@ -74,6 +80,7 @@ views:
   - entities:
     - {entity: sensor.buss_skolebrygga}
     type: entities
+  - {entity: plant.kitchen_garden, name: Kjøkkenhage, type: plant-status}
   icon: mdi:home
   path: home
   title: Home
@@ -263,6 +270,8 @@ views:
     - {entity: automation.utilities_heat_pump_is_done}
     - {entity: automation.utilities_washing_machine_has_started}
     - {entity: automation.utilities_washing_machine_is_done}
+    - {entity: automation.utilities_dryer_has_started}
+    - {entity: automation.utilities_dryer_is_done}
     title: Utilities
     type: entities
   icon: mdi:robot
