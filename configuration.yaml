@@ -26,6 +26,7 @@ tts: !include includes/tts.yaml
 ios: !include includes/ios.yaml
 verisure: !include includes/verisure.yaml
 tibber: !include includes/tibber.yaml
+plant: !include includes/plants.yaml
 apple_tv:
 
 # Custom modules
