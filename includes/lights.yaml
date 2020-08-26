@@ -49,6 +49,7 @@
     - light.color_light_1
     - light.color_temperature_light_1
     - light.color_temperature_light_2
+    - light.color_temperature_light_1_2
 
 - platform: group
   name: Outside lights
