@@ -9,24 +9,129 @@ views:
 - badges:
   - {entity: person.are_tjora}
   - {entity: person.monica_hansen}
+  - {entity: device_tracker.passat_gte}
   - {entity: sun.sun}
   cards:
   - {entity: weather.home, type: weather-forecast}
-  - columns: 3
-    entities:
-    - {entity: light.living_room_lights}
-    - {entity: light.kitchen_lights}
-    - {entity: light.office_lights}
-    - {entity: light.bedroom_lights}
-    - {entity: light.bedroom_c_lights}
-    - {entity: light.bedroom_e_lights}
-    - {entity: light.home_theater_lights}
-    - {entity: light.outside_lights}
-    - {entity: light.hall_lights}
-    - {entity: light.guest_room_lights}
-    show_state: false
-    title: Lys
-    type: glance
+  - cards:
+    - cards:
+      - entity: light.living_room_lights
+        hold_action: {action: more-info}
+        icon: mdi:sofa
+        icon_height: 40px
+        name: Stue
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      - entity: light.kitchen_lights
+        hold_action: {action: more-info}
+        icon: mdi:stove
+        icon_height: 40px
+        name: Kjøkken
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      - entity: light.hall_lights
+        hold_action: {action: more-info}
+        icon: mdi:ceiling-light
+        icon_height: 40px
+        name: Gang
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      type: horizontal-stack
+    - cards:
+      - entity: light.bedroom_lights
+        hold_action: {action: more-info}
+        icon: mdi:bed
+        icon_height: 40px
+        name: Soverom
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      - entity: light.soverom_caroline
+        hold_action: {action: more-info}
+        icon: mdi:bed
+        icon_height: 40px
+        name: Soverom C
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      - entity: light.soverom_emilie
+        hold_action: {action: more-info}
+        icon: mdi:bed
+        icon_height: 40px
+        name: Soverom E
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      type: horizontal-stack
+    - cards:
+      - entity: light.office_lights
+        hold_action: {action: more-info}
+        icon: mdi:office
+        icon_height: 40px
+        name: Kontor
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      - entity: light.home_theater_lights
+        hold_action: {action: more-info}
+        icon: mdi:theater
+        icon_height: 40px
+        name: Kino
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      - entity: light.guest_room_lights
+        hold_action: {action: more-info}
+        icon: mdi:bed
+        icon_height: 40px
+        name: Gjesterom
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      type: horizontal-stack
+    - cards:
+      - entity: light.outside_lights
+        hold_action: {action: more-info}
+        icon: mdi:terrain
+        icon_height: 40px
+        name: Ute
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action: {action: toggle}
+        type: button
+      - entity: input_select.house_mode
+        hold_action: {action: more-info}
+        icon_height: 40px
+        name: Mode
+        show_icon: true
+        show_name: false
+        show_state: true
+        tap_action: {action: more-info}
+        type: button
+      type: horizontal-stack
+    type: vertical-stack
   - cards:
     - cards:
       - entities: [sensor.kitchengarden_temperature]
@@ -57,7 +162,6 @@ views:
     type: vertical-stack
   - columns: 6
     entities:
-    - {entity: media_player.tv_stue}
     - {entity: binary_sensor.projector}
     - {entity: binary_sensor.varmepumpe}
     - {entity: binary_sensor.vaskemaskin}
@@ -80,7 +184,15 @@ views:
   - entities:
     - {entity: sensor.buss_skolebrygga}
     type: entities
-  - {entity: plant.kitchen_garden, name: Kjøkkenhage, type: plant-status}
+  - {entity: plant.kitchen_garden, name: Tomatplante, type: plant-status}
+  - entities:
+    - {entity: binary_sensor.wvwzzz3czje032810_external_power}
+    - {entity: sensor.wvwzzz3czje032810_combustion_range}
+    - {entity: sensor.wvwzzz3czje032810_electric_range}
+    - {entity: sensor.wvwzzz3czje032810_charging_time_left}
+    show_name: false
+    title: Passat GTE
+    type: glance
   icon: mdi:home
   path: home
   title: Home
@@ -125,6 +237,7 @@ views:
     - {entity: sensor.entregang_temperature}
     - {entity: sensor.entregang_humidity}
     - {entity: lock.inngangsdor}
+    - {entity: binary_sensor.strips_access_control_door_window_open}
     show_name: false
     title: Gang Hovedetasje
     type: glance
@@ -146,6 +259,7 @@ views:
     - {entity: light.kjellerstue}
     - {entity: sensor.kjellerstue_temperature}
     - {entity: sensor.kjellerstue_humidity}
+    - {entity: binary_sensor.zw100_multisensor_6_sensor}
     show_name: false
     title: Kino
     type: glance
@@ -159,6 +273,7 @@ views:
   - entities:
     - {entity: light.ute}
     - {entity: sensor.dark_sky_temperature}
+    - {entity: binary_sensor.strips_access_control_door_window_open_2}
     show_name: false
     title: Ute
     type: glance
@@ -168,6 +283,16 @@ views:
 - badges: []
   cards:
   - cards:
+    - cards:
+      - entities: [sensor.real_time_consumption_tostenhagen_54]
+        font_size: 75
+        name: Strømforbruk
+        type: custom:mini-graph-card
+      - entities: [sensor.electricity_price_tostenhagen_54]
+        font_size: 75
+        name: Strømpris
+        type: custom:mini-graph-card
+      type: horizontal-stack
     - cards:
       - entities: [sensor.house_voltage]
         font_size: 75
@@ -198,15 +323,10 @@ views:
         name: Varmepumpe
         type: custom:mini-graph-card
       type: horizontal-stack
-    - cards:
-      - entities: [sensor.electricity_price_tostenhagen_54]
-        font_size: 75
-        name: Strømpris
-        type: custom:mini-graph-card
-      type: horizontal-stack
     type: vertical-stack
   - entities:
     - sensor.uptime
+    - {entity: binary_sensor.pluto}
     - entities:
       - {entity: sensor.processor_use}
       - {entity: sensor.memory_use_percent}
@@ -245,35 +365,9 @@ views:
     - {entity: sensor.hours_tv_has_been_on_last_7_days, icon: 'mdi:television', name: Tv}
     - {entity: sensor.hours_projector_has_been_on_last_7_days, icon: 'mdi:projector',
       name: Projector}
+    show_name: false
     title: Utilities Stats
     type: glance
   icon: mdi:home-automation
   path: system
   title: System
-- badges: []
-  cards:
-  - entities: [automation.caroline_night, automation.hall_lights_day, automation.hall_lights_night,
-      automation.outdoor_day, automation.outdoor_night, automation.plant_lights_day,
-      automation.plant_lights_night, automation.projector_started, automation.projector_stopped]
-    title: Lighting
-    type: entities
-  - entities:
-    - {entity: automation.startup_notification}
-    - {entity: automation.morning_notification}
-    - {entity: automation.car_battery_notification}
-    - {entity: automation.mercury_offline_notification}
-    - {entity: automation.saturn_offline_notification}
-    title: Notifications
-    type: entities
-  - entities:
-    - {entity: automation.utilities_heat_pump_has_started}
-    - {entity: automation.utilities_heat_pump_is_done}
-    - {entity: automation.utilities_washing_machine_has_started}
-    - {entity: automation.utilities_washing_machine_is_done}
-    - {entity: automation.utilities_dryer_has_started}
-    - {entity: automation.utilities_dryer_is_done}
-    title: Utilities
-    type: entities
-  icon: mdi:robot
-  path: automation
-  title: Automation
