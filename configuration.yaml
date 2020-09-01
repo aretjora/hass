@@ -11,8 +11,7 @@ discovery: !include includes/discovery.yaml
 recorder: !include includes/recorder.yaml
 person: !include includes/persons.yaml
 notify: !include includes/notify.yaml
-input_boolean: !include includes/input_booleans.yaml
-input_datetime: !include includes/input_datetimes.yaml
+input_select: !include includes/input_selects.yaml
 
 air_quality: !include includes/air_quality.yaml
 binary_sensor: !include includes/binary_sensors.yaml
@@ -28,6 +27,7 @@ verisure: !include includes/verisure.yaml
 tibber: !include includes/tibber.yaml
 plant: !include includes/plants.yaml
 apple_tv:
+samsungtv: !include includes/samsungtv.yaml
 
 # Custom modules
-#volkswagencarnet: !include includes/volkswagencarnet.yaml
+volkswagencarnet: !include includes/volkswagencarnet.yaml

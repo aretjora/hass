@@ -1,0 +1,9 @@
+house_mode:
+  name: husmodus
+  options:
+    - Vacation
+    - Away
+    - Home
+    - Guest
+  initial: Home
+  icon: mdi:home

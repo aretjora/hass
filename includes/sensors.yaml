@@ -52,45 +52,11 @@
       icon_template: mdi:washing-machine
       value_template: "{{ state_attr('switch.vaskemaskin', 'current_power_w') }}"
 
-    vaskemaskin_stats:
-      friendly_name: "Vaskemaskin stats"
-      icon_template: mdi:washing-machine
-      value_template: >-
-        {% set hours = states.sensor.hours_washing_machine_has_been_on_last_7_days.attributes.value %}
-        {% set kwh = state_attr("switch.vaskemaskin", "today_energy_kwh") | float %} 
-        {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
-        Forbruk idag: {{ kwh }} kWh ({{ cost_today | round(2) }} kr) 
-        Siste uke: {{hours}}
-
-    vaskemaskin_today:
-      friendly_name: "Forbruk idag"
-      icon_template: mdi:washing-machine
-      value_template: >-
-        {% set kwh = state_attr("switch.vaskemaskin", "today_energy_kwh") | float %} 
-        {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
-        Forbruk idag: {{ kwh }} kWh ({{ cost_today | round(2) }} kr) 
-
-    vaskemaskin_week:
-      friendly_name: "Siste uke"
-      icon_template: mdi:washing-machine
-      value_template: >-
-        {% set hours = states.sensor.hours_washing_machine_has_been_on_last_7_days.attributes.value %}
-        Siste uke: {{hours}}
-
     torketrommel_watts:
       friendly_name: "Tørketrommel usage"
       unit_of_measurement: 'W'
       icon_template: mdi:tumble-dryer
       value_template: "{{ state_attr('switch.dryer', 'current_power_w') }}"
-
-    torketrommel_stats:
-      friendly_name: "Tørketrommel stats"
-      icon_template: mdi:tumble-dryer
-      value_template: >-
-        {% set hours = states.sensor.hours_dryer_has_been_on_last_7_days.attributes.value %}
-        {% set kwh = state_attr("switch.dryer", "today_energy_kwh") | float %} 
-        {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
-        {{hours}} - {{ cost_today | round(2) }} kr - {{ kwh }} kWh
 
     projector_watts:
       friendly_name: "Projektor usage"
@@ -103,15 +69,6 @@
       unit_of_measurement: 'W'
       icon_template: mdi:radiator
       value_template: "{{ state_attr('switch.varmepumpe', 'current_power_w') }}"
-
-    varmepumpe_stats:
-      friendly_name: "Varmepumpe stats"
-      icon_template: mdi:radiator
-      value_template: >-
-        {% set hours = states.sensor.hours_heat_pump_has_been_on_last_7_days.attributes.value %}
-        {% set kwh = state_attr("switch.varmepumpe", "today_energy_kwh") | float %} 
-        {% set cost_today = states("sensor.electricity_price_tostenhagen_54") | float * kwh %} 
-        {{hours}} - {{ cost_today | round(2) }} kr - {{ kwh }} kWh
 
     server_watts:
       friendly_name: "Server usage"

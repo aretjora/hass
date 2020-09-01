@@ -2,3 +2,5 @@ username: !secret carnet_user
 password: !secret carnet_pwd
 scan_interval:
   minutes: 5
+name:
+  wvwzzz3czje032810: 'Passat GTE'
