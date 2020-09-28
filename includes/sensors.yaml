@@ -4,13 +4,6 @@
   stop_ids:
     - !secret buss_stop
 
-# Weather
-- platform: yr
-  monitored_conditions:
-    - temperature
-    - symbol
-    - windSpeed
-
 - platform: darksky
   api_key: !secret dark_sky_api
   language: nb
@@ -29,8 +22,6 @@
 
 - platform: uptime
   unit_of_measurement: hours
-
-- platform: google_wifi
 
 - platform: template
   sensors:
@@ -115,6 +106,24 @@
 - platform: history_stats
   name: Hours projector has been on last 7 days
   entity_id: binary_sensor.projector
+  state: "on"
+  type: time
+  duration:
+    days: 7
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Hours speakers has been on last 7 days
+  entity_id: media_player.living_room
+  state: "playing"
+  type: time
+  duration:
+    days: 7
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Hours charging has been on last 7 days
+  entity_id: binary_sensor.wvwzzz3czje032810_charging
   state: "on"
   type: time
   duration:

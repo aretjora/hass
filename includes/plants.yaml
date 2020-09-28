@@ -1,10 +1,58 @@
-kitchen_garden:
+plant_1:
   sensors:
-    moisture: sensor.kitchengarden_moisture
-    battery: sensor.kitchengarden_battery
-    temperature: sensor.kitchengarden_temperature
-    conductivity: sensor.kitchengarden_conductivity
-    brightness: sensor.kitchengarden_light
+    moisture: sensor.sensor1_moisture
+    battery: sensor.sensor1_battery
+    temperature: sensor.sensor1_temperature
+    conductivity: sensor.sensor1_conductivity
+    brightness: sensor.sensor1_light
+  min_moisture: 20
+  max_moisture: 60
+  min_conductivity: 350
+  max_conductivity: 2000
+  min_brightness: 250
+  max_brightness: 3500
+  min_temperature: 8
+  max_temperature: 32
+
+plant_2:
+  sensors:
+    moisture: sensor.sensor2_moisture
+    battery: sensor.sensor2_battery
+    temperature: sensor.sensor2_temperature
+    conductivity: sensor.sensor2_conductivity
+    brightness: sensor.sensor2_light
+  min_moisture: 20
+  max_moisture: 60
+  min_conductivity: 350
+  max_conductivity: 2000
+  min_brightness: 250
+  max_brightness: 3500
+  min_temperature: 8
+  max_temperature: 32
+
+plant_3:
+  sensors:
+    moisture: sensor.sensor3_moisture
+    battery: sensor.sensor3_battery
+    temperature: sensor.sensor3_temperature
+    conductivity: sensor.sensor3_conductivity
+    brightness: sensor.sensor3_light
+  min_moisture: 20
+  max_moisture: 60
+  min_conductivity: 350
+  max_conductivity: 2000
+  min_brightness: 250
+  max_brightness: 3500
+  min_temperature: 8
+  max_temperature: 32
+
+plant_4:
+  sensors:
+    moisture: sensor.sensor4_moisture
+    battery: sensor.sensor4_battery
+    temperature: sensor.sensor4_temperature
+    conductivity: sensor.sensor4_conductivity
+    brightness: sensor.sensor4_light
   min_moisture: 20
   max_moisture: 60
   min_conductivity: 350

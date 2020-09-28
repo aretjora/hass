@@ -19,7 +19,6 @@ group: !include includes/groups.yaml
 sensor: !include includes/sensors.yaml
 light: !include includes/lights.yaml
 speedtestdotnet: !include includes/speedtestdotnet.yaml
-media_player: !include includes/media_player.yaml
 hue: !include includes/hue.yaml
 tts: !include includes/tts.yaml
 ios: !include includes/ios.yaml

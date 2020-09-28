@@ -7,8 +7,8 @@ custom_header:
 title: Home
 views:
 - badges:
-  - {entity: person.are_tjora}
-  - {entity: person.monica_hansen}
+  - {entity: device_tracker.are}
+  - {entity: device_tracker.monica_sin_iphone_2}
   - {entity: device_tracker.passat_gte}
   - {entity: sun.sun}
   cards:
@@ -81,7 +81,7 @@ views:
     - cards:
       - entity: light.office_lights
         hold_action: {action: more-info}
-        icon: mdi:office
+        icon: mdi:desk
         icon_height: 40px
         name: Kontor
         show_icon: true
@@ -132,9 +132,22 @@ views:
         type: button
       type: horizontal-stack
     type: vertical-stack
+  - columns: 6
+    entities:
+    - {entity: binary_sensor.projector}
+    - {entity: media_player.living_room, icon: 'mdi:television'}
+    - {entity: binary_sensor.varmepumpe}
+    - {entity: binary_sensor.vaskemaskin}
+    - {entity: binary_sensor.torketrommel}
+    - {entity: binary_sensor.updater}
+    show_icon: true
+    show_name: false
+    show_state: false
+    title: Status
+    type: glance
   - cards:
     - cards:
-      - entities: [sensor.kitchengarden_temperature]
+      - entities: [sensor.dark_sky_temperature]
         font_size: 75
         name: Ute
         type: custom:mini-graph-card
@@ -160,18 +173,9 @@ views:
         type: custom:mini-graph-card
       type: horizontal-stack
     type: vertical-stack
-  - columns: 6
-    entities:
-    - {entity: binary_sensor.projector}
-    - {entity: binary_sensor.varmepumpe}
-    - {entity: binary_sensor.vaskemaskin}
-    - {entity: binary_sensor.torketrommel}
-    - {entity: binary_sensor.updater}
-    show_icon: true
-    show_name: false
-    show_state: false
-    title: Status
-    type: glance
+  - entities:
+    - {entity: sensor.buss_skolebrygga}
+    type: entities
   - entities:
     - entities:
       - entities: [sensor.drivhus_watts]
@@ -180,11 +184,14 @@ views:
         type: custom:mini-graph-card
       head: switch.drivhus
       type: custom:fold-entity-row
+    - entities:
+      - entities: [sensor.fgwpe_f_wall_plug_gen5_power]
+        font_size: 75
+        show: {icon: false, name: false}
+        type: custom:mini-graph-card
+      head: switch.kitchen_plant
+      type: custom:fold-entity-row
     type: entities
-  - entities:
-    - {entity: sensor.buss_skolebrygga}
-    type: entities
-  - {entity: plant.kitchen_garden, name: Tomatplante, type: plant-status}
   - entities:
     - {entity: binary_sensor.wvwzzz3czje032810_external_power}
     - {entity: sensor.wvwzzz3czje032810_combustion_range}
@@ -200,7 +207,6 @@ views:
   cards:
   - {entity: media_player.kitchen, type: media-control}
   - {entity: media_player.living_room, type: media-control}
-  - {entity: media_player.plex_plex_for_apple_tv_stue, type: media-control}
   icon: mdi:television-classic
   path: media
   title: Media
@@ -237,7 +243,7 @@ views:
     - {entity: sensor.entregang_temperature}
     - {entity: sensor.entregang_humidity}
     - {entity: lock.inngangsdor}
-    - {entity: binary_sensor.strips_access_control_door_window_open}
+    - {entity: binary_sensor.state_main_door}
     show_name: false
     title: Gang Hovedetasje
     type: glance
@@ -259,23 +265,33 @@ views:
     - {entity: light.kjellerstue}
     - {entity: sensor.kjellerstue_temperature}
     - {entity: sensor.kjellerstue_humidity}
-    - {entity: binary_sensor.zw100_multisensor_6_sensor}
+    - {entity: binary_sensor.office_motion}
     show_name: false
     title: Kino
     type: glance
   - entities:
     - {entity: light.kjellerrom}
-    - {entity: binary_sensor.vindu_kjellerdor}
+    - {entity: sensor.basement_air_temperature}
+    - {entity: sensor.basement_humidity}
     - {entity: binary_sensor.kjellerdor}
+    - {entity: binary_sensor.basement_motion}
     show_name: false
     title: Gjesterom
     type: glance
   - entities:
     - {entity: light.ute}
     - {entity: sensor.dark_sky_temperature}
-    - {entity: binary_sensor.strips_access_control_door_window_open_2}
+    - {entity: binary_sensor.state_bod_door}
     show_name: false
     title: Ute
+    type: glance
+  - entities:
+    - {entity: light.kitchen_lights}
+    - {entity: sensor.kitchen_temperature}
+    - {entity: sensor.kitchen_humidity}
+    - {entity: binary_sensor.kitchen_motion}
+    show_name: false
+    title: Kjøkken
     type: glance
   icon: mdi:monitor-dashboard
   path: monitor
@@ -333,20 +349,38 @@ views:
       - {entity: sensor.disk_use_percent_home}
       head: binary_sensor.neptune
       type: custom:fold-entity-row
-    - entities: [sensor.saturn_cpu_load_total, sensor.saturn_memory_usage_real, sensor.saturn_volume_2_volume_used]
+    - entities: [sensor.saturn_cpu_load_total, sensor.saturn_memory_usage_real, sensor.saturn_volume_1_volume_used]
       head: binary_sensor.saturn
       type: custom:fold-entity-row
     - entities: [sensor.mercury_cpu_load_total, sensor.mercury_memory_usage_real,
         sensor.mercury_volume_1_volume_used]
       head: binary_sensor.mercury
       type: custom:fold-entity-row
-    - entities: [sensor.google_wifi_uptime, sensor.google_wifi_last_restart, sensor.google_wifi_current_version,
-        sensor.google_wifi_local_ip]
-      head: {entity: sensor.google_wifi_status, name: Google Wifi}
-      type: custom:fold-entity-row
     show_header_toggle: false
     title: Network
     type: entities
+  - cards:
+    - cards:
+      - entities: [sensor.pi_hole_dns_queries_today]
+        font_size: 75
+        name: Total Queries
+        type: custom:mini-graph-card
+      - entities: [sensor.pi_hole_ads_blocked_today]
+        font_size: 75
+        name: Queries Blocked
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    - cards:
+      - entities: [sensor.pi_hole_ads_percentage_blocked_today]
+        font_size: 75
+        name: Percent Blocked
+        type: custom:mini-graph-card
+      - entities: [sensor.pi_hole_domains_blocked]
+        font_size: 75
+        name: Domains on Blocklist
+        type: custom:mini-graph-card
+      type: horizontal-stack
+    type: vertical-stack
   - entities:
     - {entity: sensor.speedtest_ping}
     - {entity: sensor.speedtest_download}
@@ -362,12 +396,24 @@ views:
       name: Tørketrommel}
     - {entity: sensor.hours_heat_pump_has_been_on_last_7_days, icon: 'mdi:radiator',
       name: Varmepumpe}
-    - {entity: sensor.hours_tv_has_been_on_last_7_days, icon: 'mdi:television', name: Tv}
     - {entity: sensor.hours_projector_has_been_on_last_7_days, icon: 'mdi:projector',
       name: Projector}
+    - {entity: sensor.hours_speakers_has_been_on_last_7_days, icon: 'mdi:television',
+      name: Tv}
+    - {entity: sensor.hours_charging_has_been_on_last_7_days, icon: 'mdi:battery-charging',
+      name: Charging}
     show_name: false
     title: Utilities Stats
     type: glance
   icon: mdi:home-automation
   path: system
   title: System
+- badges: []
+  cards:
+  - {entity: plant.plant_1, name: Tomatplante Drivhus, type: plant-status}
+  - {entity: plant.plant_2, name: Tomatplante Kjøkken, type: plant-status}
+  - {entity: plant.plant_3, name: Plante Stue, type: plant-status}
+  - {entity: plant.plant_4, name: Plante Spisestue, type: plant-status}
+  icon: mdi:flower
+  path: plants
+  title: Plants

@@ -1,21 +1,21 @@
 - platform: group
   name: Hall lights
   entities:
-    - light.hue_white_lamp_1
-    - light.hue_white_lamp_2
-    - light.hue_white_lamp_4
-    - light.hue_white_lamp_3
+    - light.gang_kjeller
+    - light.gang_soverom
+    - light.inngang_1
+    - light.inngang_2
 
 - platform: group
   name: Living room lights
   entities:
-    - light.hue_ambiance_lamp_1
-    - light.hue_ambiance_lamp_2
+    - light.salong_tak
+    - light.spisebord_tak
 
 - platform: group
   name: Kitchen lights
   entities:
-    - light.hue_ambiance_lamp_3
+    - light.kjokken
 
 - platform: group
   name: Bedroom lights
@@ -25,36 +25,36 @@
 - platform: group
   name: Bedroom C lights
   entities:
-    - light.hue_color_lamp_4
+    - light.soverom_caroline
 
 - platform: group
   name: Bedroom E lights
   entities:
-    - light.hue_white_lamp_1_2
+    - light.soverom_emilie
 
 - platform: group
   name: Office lights
   entities:
-    - light.hue_color_lamp_2
+    - light.kontor
 
 - platform: group
   name: Home theater lights
   entities:
-    - light.hue_color_lamp_3
-    - light.hue_lightstrip_plus_1
+    - light.kino
+    - light.kino_strip
 
 - platform: group
   name: Guest room lights
   entities:
-    - light.color_light_1
-    - light.color_temperature_light_1
-    - light.color_temperature_light_2
-    - light.color_temperature_light_1_2
+    - light.kjellerrom
+    - light.kjellerrom_spot_1
+    - light.kjellerrom_spot_2
+    - light.kjellerrom_spot_3
 
 - platform: group
   name: Outside lights
   entities:
-    - light.hue_white_lamp_8
-    - light.hue_white_lamp_7
-    - light.hue_white_lamp_6
-    - light.hue_white_lamp_5
+    - light.hovedinngang
+    - light.terrasse_1
+    - light.terrasse_2
+    - light.terrasse_inngang
