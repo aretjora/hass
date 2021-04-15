@@ -4,6 +4,6 @@
     - platform: homeassistant
       event: start
   action:
-    - service: notify.mobile_app_are
+    - service: notify.mobile_app_ares_iphone
       data:
         message: "Home Assistant restarted"

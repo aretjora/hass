@@ -1,5 +1,4 @@
 house_mode:
-  name: husmodus
   options:
     - Vacation
     - Away
@@ -7,3 +6,12 @@ house_mode:
     - Guest
   initial: Home
   icon: mdi:home
+
+home_state:
+  options:
+    - Morning
+    - Day
+    - Evening
+    - Night
+  initial: Morning
+  icon: mdi:home-automation

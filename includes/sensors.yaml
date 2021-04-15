@@ -19,9 +19,58 @@
     - type: memory_free
     - type: memory_use_percent
     - type: processor_use
+    - type: process
+      arg: docker-compose
 
 - platform: uptime
   unit_of_measurement: hours
+
+- platform: version
+
+- platform: plex_recently_added
+  name: Recently Added Movies
+  token: !secret plex_token
+  host: !secret plex_host
+  port: 32400
+  section_types:
+    - movie
+
+- platform: plex_recently_added
+  name: Recently Added TV
+  token: !secret plex_token
+  host: !secret plex_host
+  port: 32400
+  section_types:
+    - show
+
+- platform: rest
+  resource: http://ip.jsontest.com
+  name: "External IP"
+  value_template: '{{ value_json.ip }}'
+
+- platform: command_line
+  name: 'Node-red Online'
+  command: response=$(curl -LIk -m 3 http://192.168.10.12:1880 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: 'Z-Wave Online'
+  command: response=$(curl -LIk -m 3 http://192.168.10.12:8091 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: 'Deluge Online'
+  command: response=$(curl -LIk -m 3 http://192.168.10.12:8112 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}'
+
+- platform: command_line
+  name: 'Portainer Online'
+  command: response=$(curl -LIk -m 3 http://192.168.10.12:9000 -o /dev/null -w "%{http_code}\n" -s); test "$response" -ge 200 && echo "Online" || echo "Offline" 
+  scan_interval: 90
+  value_template: '{{ value }}'
 
 - platform: template
   sensors:
@@ -29,7 +78,7 @@
       friendly_name: "Spenning"
       unit_of_measurement: 'V'
       icon_template: mdi:flash
-      value_template: "{{ state_attr('switch.varmepumpe', 'voltage') }}"
+      value_template: "{{ state_attr('switch.dryer', 'voltage') }}"
 
     drivhus_watts:
       friendly_name: "Drivhus usage"
@@ -55,29 +104,24 @@
       icon_template: mdi:projector
       value_template: "{{ state_attr('switch.projector', 'current_power_w') }}"
 
-    varmepumpe_watts:
-      friendly_name: "Varmepumpe usage"
-      unit_of_measurement: 'W'
-      icon_template: mdi:radiator
-      value_template: "{{ state_attr('switch.varmepumpe', 'current_power_w') }}"
-
-    server_watts:
-      friendly_name: "Server usage"
-      unit_of_measurement: 'W'
+    power_total:
+      friendly_name: "Pris pr kWh"
+      unit_of_measurement: 'NOK/kWh'
       icon_template: mdi:flash
-      value_template: "{{ state_attr('switch.server_rack', 'current_power_w') }}"
+      value_template: "{{ (states('sensor.electricity_price_tostenhagen_54') | float) + (states('input_number.power_fee') | float) }}"
+
+    drivhus_temp:
+      unit_of_measurement: '°C'
+      icon_template: hass:thermometer
+      value_template: "{{ ((float(states('sensor.sensor1_temperature')) + float(states('sensor.sensor2_temperature'))) / 2) | round(2) }}"
+      
+    drivhus_lux:
+      unit_of_measurement: 'lux'
+      icon_template: hass:brightness-5
+      value_template: "{{ ((float(states('sensor.sensor1_light')) + float(states('sensor.sensor2_light'))) / 2) | round(2) }}"
 
 - platform: history_stats
-  name: Hours TV has been on last 7 days
-  entity_id: media_player.stue_tv
-  state: "on"
-  type: time
-  duration:
-    days: 7
-  end: "{{ now() }}"
-
-- platform: history_stats
-  name: Hours washing machine has been on last 7 days
+  name: Stats Washing Machine
   entity_id: binary_sensor.vaskemaskin
   state: "on"
   type: time
@@ -86,7 +130,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
-  name: Hours dryer has been on last 7 days
+  name: Stats Dryer
   entity_id: binary_sensor.torketrommel
   state: "on"
   type: time
@@ -95,16 +139,7 @@
   end: "{{ now() }}"
 
 - platform: history_stats
-  name: Hours heat pump has been on last 7 days
-  entity_id: binary_sensor.varmepumpe
-  state: "on"
-  type: time
-  duration:
-    days: 7
-  end: "{{ now() }}"
-
-- platform: history_stats
-  name: Hours projector has been on last 7 days
+  name: Stats Projector
   entity_id: binary_sensor.projector
   state: "on"
   type: time
@@ -113,8 +148,8 @@
   end: "{{ now() }}"
 
 - platform: history_stats
-  name: Hours speakers has been on last 7 days
-  entity_id: media_player.living_room
+  name: Stats Sonos Kitchen
+  entity_id: media_player.kitchen
   state: "playing"
   type: time
   duration:
@@ -122,9 +157,18 @@
   end: "{{ now() }}"
 
 - platform: history_stats
-  name: Hours charging has been on last 7 days
-  entity_id: binary_sensor.wvwzzz3czje032810_charging
-  state: "on"
+  name: Stats Apple TV Living Room
+  entity_id: media_player.stue_2
+  state: "playing"
+  type: time
+  duration:
+    days: 7
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: Stats Apple TV Cinema
+  entity_id: media_player.entertainment_room_2
+  state: "playing"
   type: time
   duration:
     days: 7

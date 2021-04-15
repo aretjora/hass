@@ -44,12 +44,6 @@
   scan_interval: 300
 
 - platform: ping
-  name: Mercury
-  host: !secret synology_host2
-  count: 1
-  scan_interval: 300
-
-- platform: ping
   name: Neptune
   host: !secret neptune_host
   count: 1

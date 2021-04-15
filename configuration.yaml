@@ -12,6 +12,8 @@ recorder: !include includes/recorder.yaml
 person: !include includes/persons.yaml
 notify: !include includes/notify.yaml
 input_select: !include includes/input_selects.yaml
+input_number: !include includes/input_numbers.yaml
+input_boolean: !include includes/input_booleans.yaml
 
 air_quality: !include includes/air_quality.yaml
 binary_sensor: !include includes/binary_sensors.yaml
@@ -29,4 +31,4 @@ apple_tv:
 samsungtv: !include includes/samsungtv.yaml
 
 # Custom modules
-volkswagencarnet: !include includes/volkswagencarnet.yaml
+#volkswagencarnet: !include includes/volkswagencarnet.yaml
